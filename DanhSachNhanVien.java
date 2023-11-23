@@ -22,7 +22,7 @@ public class DanhSachNhanVien {
 	public void luachon() {
 		Scanner sc = new Scanner(System.in);
 		int x;
-		System.out.println("Nhập số lượng nhân viên cần nhập ban đầu: ");
+		System.out.println("Nhập số lượng nhân viên: ");
 		n = Integer.parseInt(sc.nextLine());
 		arr = new NhanVien[n];
 		boolean flag = true;
@@ -195,7 +195,7 @@ public class DanhSachNhanVien {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		try {
-			fos = new FileOutputStream("Nhanvien.dat");
+			fos = new FileOutputStream("Nhanvien.txt");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(arr);
 			System.out.println("Ghi file thành công.");
@@ -221,16 +221,13 @@ public class DanhSachNhanVien {
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
-			fis = new FileInputStream("Nhanvien.dat");
+			fis = new FileInputStream("Nhanvien.txt");
 			ois = new ObjectInputStream(fis);
 			arr = (NhanVien[]) ois.readObject();
-
-			for (int i = 0; i < arr.length; i++) {
-				if (arr[i] != null) {
-					arr[i].xuat();
-				}
-			}
+			System.out.println("Đọc thành công .");
+			
 		} catch (FileNotFoundException e) {
+			System.out.println("Khong tìm thấy file !!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
