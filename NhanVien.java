@@ -7,7 +7,6 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 	protected String maNhanVien;
 	protected double heSoLuong;
 	private transient Scanner sc = new Scanner(System.in);
-	protected static int count = 0;
 	
 	
 	
@@ -22,7 +21,6 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 		super();
 		maNhanVien = " ";
 		heSoLuong = 0;
-		count++;
 	}
 
 	public String getMaNhanVien() {
@@ -78,21 +76,4 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 		super.xuat();
 		System.out.println("Hệ số lương :"+heSoLuong);
 	}
-	///////////////////////hàm xuất danh sách sinh viên //////////////////////////////////
-//	public void xuatmangsinhvien()
-//    {
-//        System.out.println("Danh sach sinh vien vua nhap)");
-//        System.out.printf("%-12s%-12s%s\n","Column 1","Column 2","Column3");
-//        System.out.printf("%-12d%-12d%07d\n", 15, 12, 5);
-//        System.out.println("+-----------------------------------------------------------------------------------------------+");
-//    	//System.out.println("| Ma sv |          Ho va ten           | Ngay sinh  |   Dia chi      |      Dien Thoai   |");
-//    	System.out.printf("%-12s%-20s%-12s%-25s%-12s%-12s\n","MaSV","Ho va Ten","Ngay sinh","Dia Chi", "Dien Thoai","Noi hoc");
-//        //System.out.println("+--------------------------------%-12s%-20s%-12s%-25s%-12s%-12s\\n\",-------------------------+");
-//        //for(int i=0; i<arrsv.length; i++)
-//        for(Sinhvien objsv: arrsv)
-//        {    
-//            //arrsv[i].xuatsinhvien(); 
-//            objsv.xuatsinhvien();
-//        }
-//    }
 }
