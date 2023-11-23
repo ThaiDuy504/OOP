@@ -62,16 +62,16 @@ public class ConNguoi implements Serializable {
 	public String getDiaChi() {
 		return diaChi;
 	}
-
+	//.
 	public void setDiaChi() {
-		while (true) {
-			diaChi = sc.nextLine();
-			if (diaChi.matches("[\\pL\\pMn*\\d\\s*,./-]+")) {
-				break;
-			} else {
-				System.out.print("Địa chỉ không hợp lệ! Mời nhập lại: ");
-			}
-		}
+	    while (true) {
+	        diaChi = sc.nextLine();
+	        if (diaChi.matches("^[a-zA-Z0-9\\s,'.-]+$")) {
+	            break;
+	        } else {
+	            System.out.print("Địa chỉ không hợp lệ! Mời nhập lại: ");
+	        }
+	    }
 	}
 
 	public String getSoDienThoai() {
@@ -142,16 +142,4 @@ public class ConNguoi implements Serializable {
 				+ ngaySinh + "]";
 	}
 
-	public static void main(String[] args) {
-		ConNguoi cn = new ConNguoi();
-        System.out.println("Nhap vao ho va ten :");
-        cn.setHoTen();
-        System.out.println("Ho va ten la :"+cn.getHoTen());
-//		System.out.println("Nhap so dien thoai :");
-//		cn.setSoDienThoai();
-//		System.out.println("So dien thoai la :" + cn.getSoDienThoai());
-//		System.out.println("Nhap ngay sinh :");
-//		cn.setNgaySinh();
-//		System.out.println("Ngay sinh la :"+cn.getNgaySinh());
-	}
 }
