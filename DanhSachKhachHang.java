@@ -19,7 +19,7 @@ public class DanhSachKhachHang {
 		arr = null;
 	}
 
-	public void luaChon() {
+	public void luachon() {
 		Scanner sc = new Scanner(System.in);
 		int x;
 		System.out.println("Nhập số lượng khách hàng cần nhập ban đầu: ");
@@ -39,22 +39,11 @@ public class DanhSachKhachHang {
 			x = Integer.parseInt(sc.nextLine());
 			switch (x) {
 			case 1:
-				System.out.println("Nhập Khách Hàng cần tìm kiếm:");
+				System.out.println("Nhập khách hàng cần tìm kiếm:");
 				String maTimKiem = sc.nextLine();
 				timkiem(maTimKiem);
 				break;
 			case 2:
-				System.out.println("Nhập nhân viên (Quản lí) " + "(" + (count + 1) + "/" + n + ")");
-				arr[count] = new QuanLi();
-				arr[count].nhap();
-				count++;
-				break;
-			case 3:
-				System.out.println("Nhập Khách Hàng cần tìm kiếm:");
-				String maTimKiem = sc.nextLine();
-				timkiem(maTimKiem);
-				break;
-			case 4:
 				String choice;
 				do {
 					System.out.println("Thêm Khách Hàng ");
@@ -74,25 +63,25 @@ public class DanhSachKhachHang {
 						continue outer;
 					}
 				} while (true);
-			case 5:
-				System.out.println("Nhập mã Khách Hàng muốn xóa: ");
+			case 3:
+				System.out.println("Nhập mã khách hàng muốn xóa: ");
 				String maKhachHang = sc.nextLine();
 				XoaKhachHang(maKhachHang);
 				break;
-			case 6:
-				System.out.println("Danh sách tất cả Khách Hàng");
+			case 4:
+				System.out.println("Danh sách tất cả khách hàng");
 				XuatDanhSachKH();
 				break;
-			case 7:
+			case 5:
 				TinhDiemTichLuy();
 				break;
-			case 8:
+			case 6:
 				ghifile();
 				break;
-			case 9:
+			case 7:
 				docfile();
 				break;
-			case 10:
+			case 8:
 				flag = false;
 				break;
 			default:
@@ -146,7 +135,7 @@ public class DanhSachKhachHang {
 			arr = Arrays.copyOf(arr, arr.length - 1);
 			System.out.println("Xoá thành công");
 		} else {
-			System.out.println("Không tìm thấy mã Khách Hàng cần xoá !!!");
+			System.out.println("Không tìm thấy mã Khách Hàng cần xoá.");
 		}
 	}
 
