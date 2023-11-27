@@ -19,7 +19,7 @@ public class DanhSachKhachHang {
 		arr = null;
 	}
 
-	public void luachon() {
+	public void luaChon() {
 		Scanner sc = new Scanner(System.in);
 		int x;
 		System.out.println("Nhập số lượng khách hàng cần nhập ban đầu: ");
