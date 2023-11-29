@@ -1,68 +1,84 @@
 package Net;
 
-public class BillChiTiet extends Bill{
-    public int maKhachHang;
-    public String ngayXuat;
-    public double donGia;
-    public BillChiTiet(){
-    }
-    
-	
-	public BillChiTiet(int maBill, int soGioChoi, DanhSachThucAn dsTA,int maKhachHang,String ngayXuat,double donGia) {
-		super(maBill, soGioChoi,dsTA);
-		this.maKhachHang=maKhachHang;
-		this.ngayXuat=ngayXuat;
-		this.donGia=donGia;
+public class BillChiTiet {
+	private String maBill;
+	private String ngayXuat;
+	private int soluong;
+	private ThucAn thucAn;
+
+	public BillChiTiet() {
+		maBill = "";
+		ngayXuat = "";
+		soluong = 0;
+		thucAn = null;
 	}
 
+	public BillChiTiet(int maBill, String ngayXuat, int soluong, ThucAn thucAn) {
+		this.maBill = maBill;
+		this.ngayXuat = ngayXuat;
+		this.soluong = soluong;
+		this.thucAn = thucAn;
+	}
 
-	public int getMaKhachHang() {
-		return maKhachHang;
-	}
-	public void setMaKhachHang(int maKhachHang) {
-		this.maKhachHang = maKhachHang;
-	}
-	public int getMaBill() {
+	public String getMaBill() {
 		return maBill;
 	}
-	public void setMaBill(int maBill) {
+
+	public void setMaBill(String maBill) {
 		this.maBill = maBill;
 	}
+
 	public String getNgayXuat() {
 		return ngayXuat;
 	}
+
 	public void setNgayXuat(String ngayXuat) {
 		this.ngayXuat = ngayXuat;
 	}
+
+	public int getSoluong() {
+		return soluong;
+	}
+
+	public void setSoluong(int soluong) {
+		this.soluong = soluong;
+	}
+
+	public ThucAn getThucAn() {
+		return thucAn;
+	}
+
+	public void setThucAn(ThucAn thucAn) {
+		this.thucAn = thucAn;
+	}
+
 	public double getDonGia() {
-		return donGia;
+		return soluong * thucAn.getDonGia();
 	}
-	public void setDonGia(double donGia) {
-		this.donGia = donGia;
-	}
+
 	public void nhap() {
-        super.nhap();
-        System.out.print("Nhập mã khách hàng: ");
-        setMaKhachHang(sc.nextInt());
+		System.out.print("Nhập mã Bill: ");
+		setMaBill(maBill);
 
-        System.out.print("Nhập ngày xuất: ");
-        setNgayXuat(sc.next());
+		System.out.print("Nhập ngày xuất: ");
+		setNgayXuat(sc.next());
 
-        System.out.print("Nhập đơn giá: ");
-        setDonGia(sc.nextDouble());
-    }
-	public void xuat() {
-		super.xuat();
-        System.out.println("Mã khách hàng: "+getMaKhachHang());
-        System.out.println("Ngày xuất: "+getNgayXuat());
-        System.out.println("Đơn giá: "+getDonGia());
-        System.out.println("----------------------------");
+		System.out.print("Nhap thuc an: ");
+		thucAn.nhap();
+		System.out.print("Nhap so luong: ");
+		sc.nextInt(soluong);
 	}
 
+	public void xuat() {
+		System.out.println("Mã khách hàng: " + getMaKhachHang());
+		System.out.println("Ngày xuất: " + getNgayXuat());
+		System.out.println("Đơn giá: " + getDonGia());
+		System.out.println("----------------------------");
+	}
 
 	@Override
 	public String toString() {
-		return "BillChiTiet [maKhachHang=" + maKhachHang + ", ngayXuat=" + ngayXuat + ", donGia=" + donGia + "]";
+		return "BillChiTiet [maKhachHang=" + maKhachHang + ", ngayXuat=" + ngayXuat + ", donGia=" + getDonGia() + "]";
 	}
-	
+
 }

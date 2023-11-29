@@ -18,15 +18,17 @@ public class DanhSachThucAn {
         arrta = null;
         n = 0;
     }
-    public DanhSachThucAn(ThucAn[] arrta,int n) {
-    	this.arrta=arrta;
-    	this.n=n;
+
+    public DanhSachThucAn(ThucAn[] arrta, int n) {
+        this.arrta = arrta;
+        this.n = n;
     }
+
     public void menu() {
         int choice;
 
         do {
-        	System.out.println("\n---------- Menu ----------");
+            System.out.println("\n---------- Menu ----------");
             System.out.println("1. Tìm kiếm thức ăn");
             System.out.println("2. Thêm thức ăn");
             System.out.println("3. Xóa thức ăn");
@@ -62,7 +64,7 @@ public class DanhSachThucAn {
                     writefile();
                     break;
                 case 7:
-                	readfile();
+                    readfile();
                     break;
                 case 0:
                     System.out.println("Thoát chương trình.");
@@ -72,40 +74,41 @@ public class DanhSachThucAn {
             }
         } while (choice != 0);
     }
-    
+
     public void nhapdsThucAn() {
-    	System.out.println("\n---------- Nhập danh sách thức ăn ----------");
+        System.out.println("\n---------- Nhập danh sách thức ăn ----------");
         System.out.print("Nhập vào số lượng thức ăn:");
         n = sc.nextInt();
         arrta = new ThucAn[n];
         for (int i = 0; i < n; i++) {
-            System.out.println("Nhập vào thức ăn thứ "+(i + 1));
+            System.out.println("Nhập vào thức ăn thứ " + (i + 1));
             ThucAn ta = new ThucAn();
             ta.nhap();
             arrta[i] = ta;
         }
     }
 
-    public void timkiemThucAn() {
-    	System.out.println("\n---------- Tìm kiếm thức ăn ----------");
+    public ThucAn timkiemThucAn() {
+        System.out.println("\n---------- Tìm kiếm thức ăn ----------");
         System.out.print("Nhập vào mã thức ăn cần tìm:");
         int mta = sc.nextInt();
         for (int i = 0; i < arrta.length; i++)
             if (arrta[i].getMaThucAn() == mta)
-                arrta[i].xuat();
+                return arrta[i];
+        return null;
     }
 
     public void themThucAn() {
-    	System.out.println("\n---------- Them thuc an ----------");
+        System.out.println("\n---------- Them thuc an ----------");
         ThucAn ta = new ThucAn();
         ta.nhap();
-        arrta = Arrays.copyOf(arrta,arrta.length+1);
+        arrta = Arrays.copyOf(arrta, arrta.length + 1);
         arrta[n] = ta;
         n++;
     }
 
     public void xoaThucAn() {
-    	System.out.println("\n---------- Xóa thức ăn ----------");
+        System.out.println("\n---------- Xóa thức ăn ----------");
         System.out.print("Nhập mã thức ăn cần xóa:");
         int mta = sc.nextInt();
         int index = -1;
@@ -128,9 +131,8 @@ public class DanhSachThucAn {
         }
     }
 
-
     public void suaThucAn() {
-    	System.out.println("\n---------- Sửa thức ăn ----------");
+        System.out.println("\n---------- Sửa thức ăn ----------");
         System.out.print("Nhập mã thức ăn cần sửa:");
         int mta = sc.nextInt();
         for (int i = 0; i < arrta.length; i++) {
@@ -141,24 +143,26 @@ public class DanhSachThucAn {
             }
         }
     }
+
     public void xuatdsThucAn() {
-    	System.out.println("\n---------- Danh sách thức ăn ----------");
+        System.out.println("\n---------- Danh sách thức ăn ----------");
         System.out.println("Danh sách thức ăn:");
         for (int i = 0; i < arrta.length; i++) {
             System.out.println("Thức ăn thứ " + (i + 1) + ":");
             arrta[i].xuat();
         }
     }
+
     public void readfile() {
-        FileInputStream fis=null;
-        ObjectInputStream ois=null;
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
         try {
-            fis=new FileInputStream("ThucAn.dat");
-            ois=new ObjectInputStream(fis);
+            fis = new FileInputStream("ThucAn.dat");
+            ois = new ObjectInputStream(fis);
 
             arrta = (ThucAn[]) ois.readObject();
 
-            if (arrta==null) {
+            if (arrta == null) {
                 System.out.println("Danh sách thức ăn trống.");
             } else {
                 for (int i = 0; i < arrta.length; i++) {
@@ -217,5 +221,5 @@ public class DanhSachThucAn {
             }
         }
     }
-    
+
 }

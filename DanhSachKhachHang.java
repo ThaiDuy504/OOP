@@ -1,4 +1,4 @@
-package quan_li_quan_net;
+package Net;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,55 +38,55 @@ public class DanhSachKhachHang {
 			System.out.println("8.Thoát khỏi chương trình.");
 			x = Integer.parseInt(sc.nextLine());
 			switch (x) {
-			case 1:
-				System.out.println("Nhập khách hàng cần tìm kiếm:");
-				String maTimKiem = sc.nextLine();
-				timkiem(maTimKiem);
-				break;
-			case 2:
-				String choice;
-				do {
-					System.out.println("Thêm Khách Hàng ");
-					int c = Integer.parseInt(sc.nextLine());
+				case 1:
+					System.out.println("Nhập khách hàng cần tìm kiếm:");
+					String maTimKiem = sc.nextLine();
+					timkiem(maTimKiem);
+					break;
+				case 2:
+					String choice;
+					do {
+						System.out.println("Thêm Khách Hàng ");
+						int c = Integer.parseInt(sc.nextLine());
 
-					switch (c) {
-					case 1:
-						ThemKhachHang();
-						break;
-					default:
-						System.out.println("Lựa chọn không hợp lệ");
-						break;
-					}
-					System.out.println("Bạn có muốn tiếp tục thêm hay không (y/n)?");
-					choice = sc.nextLine();
-					if (choice.equalsIgnoreCase("n")) {
-						continue outer;
-					}
-				} while (true);
-			case 3:
-				System.out.println("Nhập mã khách hàng muốn xóa: ");
-				String maKhachHang = sc.nextLine();
-				XoaKhachHang(maKhachHang);
-				break;
-			case 4:
-				System.out.println("Danh sách tất cả khách hàng");
-				XuatDanhSachKH();
-				break;
-			case 5:
-				TinhDiemTichLuy();
-				break;
-			case 6:
-				ghifile();
-				break;
-			case 7:
-				docfile();
-				break;
-			case 8:
-				flag = false;
-				break;
-			default:
-				System.out.println("Lựa chọn không hợp lệ");
-				break;
+						switch (c) {
+							case 1:
+								ThemKhachHang();
+								break;
+							default:
+								System.out.println("Lựa chọn không hợp lệ");
+								break;
+						}
+						System.out.println("Bạn có muốn tiếp tục thêm hay không (y/n)?");
+						choice = sc.nextLine();
+						if (choice.equalsIgnoreCase("n")) {
+							continue outer;
+						}
+					} while (true);
+				case 3:
+					System.out.println("Nhập mã khách hàng muốn xóa: ");
+					String maKhachHang = sc.nextLine();
+					XoaKhachHang(maKhachHang);
+					break;
+				case 4:
+					System.out.println("Danh sách tất cả khách hàng");
+					XuatDanhSachKH();
+					break;
+				case 5:
+					TinhDiemTichLuy();
+					break;
+				case 6:
+					ghifile();
+					break;
+				case 7:
+					docfile();
+					break;
+				case 8:
+					flag = false;
+					break;
+				default:
+					System.out.println("Lựa chọn không hợp lệ");
+					break;
 			}
 		}
 	}
@@ -151,6 +151,7 @@ public class DanhSachKhachHang {
 	public void TinhDiemTichLuy() {
 		System.out.println("---------Danh sách điểm của từng Khách Hàng------");
 		for (KhachHang khachHang : arr) {
+			// ???
 			if (khachHang != null) {
 				System.out.println(khachHang.TinhDiemTichLuy());
 			}

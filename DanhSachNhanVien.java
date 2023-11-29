@@ -1,4 +1,4 @@
-package quan_li_net;
+package Net;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,72 +40,72 @@ public class DanhSachNhanVien {
 			System.out.println("10.Thoát khỏi chương trình.");
 			x = Integer.parseInt(sc.nextLine());
 			switch (x) {
-			case 1:
-				System.out.println("Nhập nhân viên (Phục vụ) " + "(" + (count + 1) + "/" + n + ")");
-				arr[count] = new PhucVu();
-				arr[count].nhap();
-				count++;
-				break;
-			case 2:
-				System.out.println("Nhập nhân viên (Quản lí) " + "(" + (count + 1) + "/" + n + ")");
-				arr[count] = new QuanLi();
-				arr[count].nhap();
-				count++;
-				break;
-			case 3:
-				System.out.println("Nhập mã nhân viên cần tìm kiếm:");
-				String maTimKiem = sc.nextLine();
-				timkiem(maTimKiem);
-				break;
-			case 4:
-				String choice;
-				do {
-					System.out.println("Nhập lựa chọn của bạn");
-					System.out.println("1. Thêm nhân viên (Phục vụ)");
-					System.out.println("2. Thêm nhân viên (Quản lí)");
-					int c = Integer.parseInt(sc.nextLine());
+				case 1:
+					System.out.println("Nhập nhân viên (Phục vụ) " + "(" + (count + 1) + "/" + n + ")");
+					arr[count] = new PhucVu();
+					arr[count].nhap();
+					count++;
+					break;
+				case 2:
+					System.out.println("Nhập nhân viên (Quản lí) " + "(" + (count + 1) + "/" + n + ")");
+					arr[count] = new QuanLi();
+					arr[count].nhap();
+					count++;
+					break;
+				case 3:
+					System.out.println("Nhập mã nhân viên cần tìm kiếm:");
+					String maTimKiem = sc.nextLine();
+					timkiem(maTimKiem);
+					break;
+				case 4:
+					String choice;
+					do {
+						System.out.println("Nhập lựa chọn của bạn");
+						System.out.println("1. Thêm nhân viên (Phục vụ)");
+						System.out.println("2. Thêm nhân viên (Quản lí)");
+						int c = Integer.parseInt(sc.nextLine());
 
-					switch (c) {
-					case 1:
-						ThemNvPhucvu();
-						break;
-					case 2:
-						ThemNvQuanli();
-						break;
-					default:
-						System.out.println("Lựa chọn không hợp lệ");
-						break;
-					}
-					System.out.println("Bạn có muốn tiếp tục thêm hay không (y/n)?");
-					choice = sc.nextLine();
-					if (choice.equalsIgnoreCase("n")) {
-						continue outer;
-					}
-				} while (true);
-			case 5:
-				System.out.println("Nhập mã nhân viên cần xoá:");
-				String maNhanVien = sc.nextLine();
-				XoaNhanVien(maNhanVien);
-				break;
-			case 6:
-				System.out.println("Danh sách tất cả nhân viên");
-				XuatDanhSachNV();
-				break;
-			case 7:
-				Tinhluong();
-				break;
-			case 8:
-				ghifile();
-				break;
-			case 9:
-				docfile();
-				break;
-			case 10:
-				flag = false;
-				break;
-			default:
-				System.out.println("Lựa chọn không hợp lệ");
-				break;
+						switch (c) {
+							case 1:
+								ThemNvPhucvu();
+								break;
+							case 2:
+								ThemNvQuanli();
+								break;
+							default:
+								System.out.println("Lựa chọn không hợp lệ");
+								break;
+						}
+						System.out.println("Bạn có muốn tiếp tục thêm hay không (y/n)?");
+						choice = sc.nextLine();
+						if (choice.equalsIgnoreCase("n")) {
+							continue outer;
+						}
+					} while (true);
+				case 5:
+					System.out.println("Nhập mã nhân viên cần xoá:");
+					String maNhanVien = sc.nextLine();
+					XoaNhanVien(maNhanVien);
+					break;
+				case 6:
+					System.out.println("Danh sách tất cả nhân viên");
+					XuatDanhSachNV();
+					break;
+				case 7:
+					Tinhluong();
+					break;
+				case 8:
+					ghifile();
+					break;
+				case 9:
+					docfile();
+					break;
+				case 10:
+					flag = false;
+					break;
+				default:
+					System.out.println("Lựa chọn không hợp lệ");
+					break;
 			}
 		}
 	}
@@ -225,7 +225,7 @@ public class DanhSachNhanVien {
 			ois = new ObjectInputStream(fis);
 			arr = (NhanVien[]) ois.readObject();
 			System.out.println("Đọc thành công .");
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Khong tìm thấy file !!");
 			e.printStackTrace();

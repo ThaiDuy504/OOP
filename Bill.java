@@ -1,67 +1,87 @@
 package Net;
 
 import java.util.*;
+import java.time.LocalDate;
 
-public class Bill{
-	protected int maBill;
-   	private int soGioChoi;
-   	private DanhSachThucAn dsTA;
-   	Scanner sc = new Scanner(System.in);
-   
-   	public Bill() {
-   	}
-   	
-   	public Bill(int maBill, int soGioChoi, DanhSachThucAn dsTA) {
-		this.maBill = maBill;
-		this.soGioChoi = soGioChoi;
-		this.dsTA = dsTA;
-   }
+public class Bill {
+	private String maBill;
+	private String maKhachHang;
+	private String maNhanVien;
+	private String ngayLap = "";
+	private int soGioChoi;
+	private int tongTien;
+	private String trangThai = "Xuat";
+	private static int billID;
+	Scanner sc = new Scanner(System.in);
 
-	public int getMaBill() {
+	public Bill() {
+		maBill = "Bill" + billID;
+		billID++;
+		ngayLap = " ";
+	}
+
+	public String getMaBill() {
 		return maBill;
 	}
 
-	public void setMaBill(int maBill) {
-		this.maBill = maBill;
+	public String getMaKhachHang() {
+		return maKhachHang;
+	}
+
+	public void setMaKhachHang(String maKhachHang) {
+		this.maKhachHang = maKhachHang;
+	}
+
+	public String getMaNhanVien() {
+		return maNhanVien;
+	}
+
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
+	}
+
+	public String getNgayLap() {
+		return ngayLap;
 	}
 
 	public int getSoGioChoi() {
 		return soGioChoi;
 	}
-	
+
 	public void setSoGioChoi(int soGioChoi) {
 		this.soGioChoi = soGioChoi;
 	}
 
-	public DanhSachThucAn getDsTA() {
-		return dsTA;
+	public int getTongTien() {
+		return tongTien;
 	}
 
-	public void setDsTA(DanhSachThucAn dsTA) {
-		this.dsTA = dsTA;
-	}
-	public void nhap() {
-	    System.out.print("Nhập mã bill:");
-	    setMaBill(sc.nextInt());
-	    System.out.print("Nhập số giờ chơi:");
-	    setSoGioChoi(sc.nextInt());
-	    dsTA.nhapdsThucAn();
+	public void setTongTien(int tongTien) {
+		this.tongTien = tongTien;
 	}
 
-	public void xuat() {
-        System.out.println("Mã bill: "+getMaBill());
-        System.out.println("So gio choi: "+getSoGioChoi());
-        System.out.println("Danh sach thuc an: ");
-        dsTA.xuatdsThucAn();
-        System.out.println("----------------------------");
+	public String getTrangThai() {
+		return trangThai;
 	}
 
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
+	}
 
+	public void huyBill() {
+		setTrangThai("Da Huy");
+	}
 
 	@Override
 	public String toString() {
-		return "Bill [maBill=" + maBill + ", soGioChoi=" + soGioChoi + "]";
+		return "Bill [maBill= " + maBill + ", Ngay xuat= " + ngayLap + ", Nhan vien xuat bill= " + maNhanVien
+				+ ", maKhachHang = " + maKhachHang
+				+ ", soGioChoi= " + soGioChoi
+				+ ",Tong tien = " + tongTien + ", Trang Thai: " + trangThai + "]";
 	}
-	
-}
 
+	public static void main(String args[]) {
+		Bill b = new Bill();
+		System.out.println(b);
+	}
+}

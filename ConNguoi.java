@@ -1,4 +1,4 @@
-package quan_li_net;
+package Net;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -7,18 +7,15 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class ConNguoi implements Serializable {
-	
+
 	protected String hoTen;
 	protected String diaChi;
 	protected String soDienThoai;
 	protected String ngaySinh;
 	protected String taiKhoan;
 	private transient Scanner sc = new Scanner(System.in);
-	
-	
 
 	public ConNguoi(String hoTen, String diaChi, String soDienThoai, String ngaySinh) {
-		super();
 		this.hoTen = hoTen;
 		this.diaChi = diaChi;
 		this.soDienThoai = soDienThoai;
@@ -62,16 +59,17 @@ public class ConNguoi implements Serializable {
 	public String getDiaChi() {
 		return diaChi;
 	}
-	//.
+
+	// .
 	public void setDiaChi() {
-	    while (true) {
-	        diaChi = sc.nextLine();
-	        if (diaChi.matches("^[a-zA-Z0-9\\s,'.-]+$")) {
-	            break;
-	        } else {
-	            System.out.print("Địa chỉ không hợp lệ! Mời nhập lại: ");
-	        }
-	    }
+		while (true) {
+			diaChi = sc.nextLine();
+			if (diaChi.matches("^[a-zA-Z0-9\\s,'.-]+$")) {
+				break;
+			} else {
+				System.out.print("Địa chỉ không hợp lệ! Mời nhập lại: ");
+			}
+		}
 	}
 
 	public String getSoDienThoai() {
@@ -95,19 +93,18 @@ public class ConNguoi implements Serializable {
 
 	public void setNgaySinh() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	    sdf.setLenient(false);
-	    
-	    while (true) {
-	        String input = sc.nextLine();
-	        try {
-	            Date date = sdf.parse(input);
-	            ngaySinh = sdf.format(date);
-	            break;
-	        } catch (ParseException e) {
-	            System.out.print("Ngày sinh không hợp lệ! Mời nhập lại (dd/MM/yyyy): ");
-	        }
-	    }
-    }
+		sdf.setLenient(false);
+		while (true) {
+			String input = sc.nextLine();
+			try {
+				Date date = sdf.parse(input);
+				ngaySinh = sdf.format(date);
+				break;
+			} catch (ParseException e) {
+				System.out.print("Ngày sinh không hợp lệ! Mời nhập lại (dd/MM/yyyy): ");
+			}
+		}
+	}
 
 	public String getTaiKhoan() {
 		return taiKhoan;
@@ -116,7 +113,7 @@ public class ConNguoi implements Serializable {
 	public void setTaiKhoan(String taiKhoan) {
 		this.taiKhoan = taiKhoan;
 	}
-	
+
 	public void nhap() {
 		System.out.println("Nhập họ tên :");
 		setHoTen();
@@ -127,18 +124,18 @@ public class ConNguoi implements Serializable {
 		System.out.println("Nhập ngày sinh :");
 		setNgaySinh();
 	}
-	
+
 	public void xuat() {
-		System.out.println("Họ và tên sinh viên :"+hoTen);
-		System.out.println("Địa chỉ :"+diaChi);
-		System.out.println("Số điện thoại :"+soDienThoai);
-		System.out.println("Ngày sinh :"+ngaySinh);
+		System.out.println("Họ và tên sinh viên :" + hoTen);
+		System.out.println("Địa chỉ :" + diaChi);
+		System.out.println("Số điện thoại :" + soDienThoai);
+		System.out.println("Ngày sinh :" + ngaySinh);
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "ConNguoi [ Họ tên :" + hoTen + ", Địa chỉ :" + diaChi + ",Số điện thoại :" + soDienThoai + ", Ngày sinh :"
+		return "ConNguoi [ Họ tên :" + hoTen + ", Địa chỉ :" + diaChi + ",Số điện thoại :" + soDienThoai
+				+ ", Ngày sinh :"
 				+ ngaySinh + "]";
 	}
 
