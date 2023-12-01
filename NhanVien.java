@@ -1,4 +1,4 @@
-package quan_li_net;
+package Net;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -7,10 +7,9 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 	protected String maNhanVien;
 	protected double heSoLuong;
 	private transient Scanner sc = new Scanner(System.in);
-	
-	
-	
-	public NhanVien(String maNhanVien ,String hoTen, String diaChi, String soDienThoai, String ngaySinh, double heSoLuong) {
+
+	public NhanVien(String maNhanVien, String hoTen, String diaChi, String soDienThoai, String ngaySinh,
+			double heSoLuong) {
 		super(hoTen, diaChi, soDienThoai, ngaySinh);
 		// TODO Auto-generated constructor stub
 		this.maNhanVien = maNhanVien;
@@ -58,9 +57,9 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 			}
 		}
 	}
-	
+
 	public abstract String TinhLuong();
-	
+
 	public void nhap() {
 		System.out.println("-------------Nhập nhân viên-----------");
 		System.out.println("Nhập mã nhân viên :");
@@ -69,11 +68,11 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 		System.out.println("Nhập hệ số lương :");
 		setHeSoLuong();
 	}
-	
+
 	public void xuat() {
 		System.out.println("---------Xuất thông tin nhân viên-------");
-		System.out.println("Mã nhân viên :"+maNhanVien);
+		System.out.println("Mã nhân viên :" + maNhanVien);
 		super.xuat();
-		System.out.println("Hệ số lương :"+heSoLuong);
+		System.out.println("Hệ số lương :" + heSoLuong);
 	}
 }
