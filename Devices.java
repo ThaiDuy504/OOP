@@ -4,41 +4,55 @@ import java.util.Scanner;
 
 public class Devices {
     Scanner sc = new Scanner(System.in);
-    public String maNhaPhanPhoi;
-    public String MaThietBi;
-    public String TenThietBi;
-    public String LoaiThietBi;
-    public int BaoHanh;
+    private NhaPhanPhoi nhaPhanPhoi;
+    private String MaThietBi;
+    private String TenThietBi;
+    private String LoaiThietBi;
+    private int BaoHanh;
 
     public Devices() {
     }
 
-    public Devices(String MNPP, String MTB, String TTB, String LTB, int BH) {
-        this.maNhaPhanPhoi = MNPP;
-        this.MaThietBi = MTB;
-        this.TenThietBi = TTB;
-        this.LoaiThietBi = LTB;
-        this.BaoHanh = BH;
+    public Devices(NhaPhanPhoi nhaPhanPhoi, String maThietBi, String tenThietBi, String loaiThietBi, int baoHanh) {
+        this.nhaPhanPhoi = nhaPhanPhoi;
+        MaThietBi = maThietBi;
+        TenThietBi = tenThietBi;
+        LoaiThietBi = loaiThietBi;
+        BaoHanh = baoHanh;
     }
 
     public Devices(Devices a) {
-        this.maNhaPhanPhoi = a.maNhaPhanPhoi;
+        this.nhaPhanPhoi = a.nhaPhanPhoi;
         this.MaThietBi = a.MaThietBi;
         this.TenThietBi = a.TenThietBi;
         this.LoaiThietBi = a.LoaiThietBi;
         this.BaoHanh = a.BaoHanh;
     }
 
-    public String getMaNhaPhanPhoi() {
-        return maNhaPhanPhoi;
+    public NhaPhanPhoi getNhaPhanPhoi() {
+        return nhaPhanPhoi;
     }
 
-    public void setMaNhaPhanPhoi(String maNhaPhanPhoi) {
-        this.maNhaPhanPhoi = maNhaPhanPhoi;
+    public void setNhaPhanPhoi(NhaPhanPhoi nhaPhanPhoi) {
+        this.nhaPhanPhoi = nhaPhanPhoi;
     }
 
     public String getMaThietBi() {
         return MaThietBi;
+    }
+
+    public void setMaThietBi() {
+        String maThietBi;
+        while (true) {
+            System.out.print("Nhap ma thiet bi: ");
+            maThietBi = sc.nextLine();
+            if (checkLoi.checkMaThietBi(maThietBi) == false) {
+                System.out.println("Nhap ma thiet bi sai cu phap TB + 3 ky tu so tro len");
+            } else
+                break;
+
+        }
+        setMaThietBi(maThietBi);
     }
 
     public void setMaThietBi(String maThietBi) {
@@ -70,10 +84,8 @@ public class Devices {
     }
 
     public void nhap() {
-        System.out.println("nhap vao ma nha phan phoi : ");
-        maNhaPhanPhoi = sc.nextLine();
-        System.out.println("nhap vao ma thiet bi : ");
-        MaThietBi = sc.nextLine();
+        nhaPhanPhoi.nhap();
+        setMaThietBi();
         System.out.println("nhap vao ten thiet bi : ");
         TenThietBi = sc.nextLine();
         System.out.println("nhap vao loai thiet bi : ");
@@ -83,7 +95,7 @@ public class Devices {
     }
 
     public void xuat() {
-        System.out.println("ma nha phan phoi la: " + maNhaPhanPhoi);
+        System.out.println("ma nha phan phoi : " + nhaPhanPhoi.toString());
         System.out.println("ma thiet bi la : " + MaThietBi);
         System.out.println("ten thiet bi la : " + TenThietBi);
         System.out.println("loai thiet bi la : " + LoaiThietBi);
@@ -92,7 +104,8 @@ public class Devices {
 
     @Override
     public String toString() {
-        return "[Ma nha phan phoi= " + maNhaPhanPhoi + ", Ma thiet bi= " + MaThietBi + ", Ten thiet bi= " + TenThietBi
+        return "[Nha phan phoi= " + nhaPhanPhoi.toString() + ", Ma thiet bi= " + MaThietBi + ", Ten thiet bi= "
+                + TenThietBi
                 + ", Loai thiet bi = " + LoaiThietBi + ", Thoi gian bao hanh = " + BaoHanh + "]";
     }
 }

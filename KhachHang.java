@@ -1,12 +1,22 @@
-package quan_li_quan_net;
+package Net;
 
 import java.util.Scanner;
 
-public abstract class KhachHang extends ConNguoi {
-    private String maKhachHang;
-    private int diemTichLuy;
+import Net.TaiKhoan;
+import Net.checkLoi;
 
-    public KhachHang(String hoTen, String diaChi, String soDienThoai, String ngaySinh, String taiKhoan,
+public class KhachHang extends ConNguoi {
+    private String maKhachHang;
+    private double diemTichLuy;
+    Scanner sc = new Scanner(System.in);
+
+    public KhachHang() {
+        super();
+        maKhachHang = "";
+        diemTichLuy = 0;
+    }
+
+    public KhachHang(String hoTen, String diaChi, String soDienThoai, String ngaySinh, TaiKhoan taiKhoan,
             String maKhachHang, int diemTichLuy) {
         super(hoTen, diaChi, soDienThoai, ngaySinh, taiKhoan);
         this.maKhachHang = maKhachHang;
@@ -18,10 +28,11 @@ public abstract class KhachHang extends ConNguoi {
     }
 
     public void setMaKhachHang() {
+        checkLoi chk = new checkLoi();
         while (true) {
             maKhachHang = sc.nextLine();
             maKhachHang = maKhachHang.toUpperCase();
-            if (maKhachHang.matches("KH" + "[0-9]{1,2}")) {
+            if (chk.checkMaKhachHang(maKhachHang)) {
                 break;
             } else {
                 System.out.println(" Mã Khách Hàng: KH__. Ví dụ: KH01");
@@ -30,26 +41,28 @@ public abstract class KhachHang extends ConNguoi {
         }
     }
 
-    public int getDiemTichLuy() {
+    public double getDiemTichLuy() {
         return diemTichLuy;
     }
 
-    public void setDiemTichLuy(int diemTichLuy) {
+    public void setDiemTichLuy(double diemTichLuy) {
         while (true) {
-            diemTichLuy = Double.parseDouble(sc.nextLine());
-            if (diemTichLuy >= 0) {
-                break;
+            if (diemTichLuy >= 0.0) {
+                return;
             } else {
-                system.out.print("Điểm Tích Lũy không đúng! Mời Nhập Lại: ");
+                System.out.print("Điểm Tích Lũy không đúng! Mời Nhập Lại: ");
+                diemTichLuy = sc.nextDouble();
             }
         }
     }
 
-    public void CongDiemTichLuy(int diem) {
+    public void CongDiemTichLuy(double diem) {
         diemTichLuy += diem;
     }
 
-    public abstract String TinhDiemTichLuy();
+    public double TinhDiemTichLuy() {
+        return diemTichLuy;
+    }
 
     public void nhap() {
         System.out.println("-----------Nhập Thông Tin Khách Hàng-----------");
@@ -57,7 +70,7 @@ public abstract class KhachHang extends ConNguoi {
         setMaKhachHang();
         super.nhap();
         System.out.println("Nhập điểm tích lũy :");
-        setDiemTichLuy();
+        setDiemTichLuy(sc.nextDouble());
     }
 
     public void xuat() {

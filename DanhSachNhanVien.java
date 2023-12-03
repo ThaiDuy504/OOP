@@ -9,14 +9,17 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import Net.NhanVien;
+import Net.QuyenHanNhanVien;
+
 public class DanhSachNhanVien {
-	NhanVien[] arr;
+	NhanVien[] arr = new NhanVien[1000];
 	int n;
 	int count = 0;
 
 	public DanhSachNhanVien() {
 		n = 0;
-		arr = null;
+		arr = new NhanVien[1];
 	}
 
 	public void luachon() {
@@ -44,12 +47,13 @@ public class DanhSachNhanVien {
 					System.out.println("Nhập nhân viên (Phục vụ) " + "(" + (count + 1) + "/" + n + ")");
 					arr[count] = new PhucVu();
 					arr[count].nhap();
+					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
 					count++;
 					break;
 				case 2:
 					System.out.println("Nhập nhân viên (Quản lí) " + "(" + (count + 1) + "/" + n + ")");
 					arr[count] = new QuanLi();
-					arr[count].nhap();
+					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
 					count++;
 					break;
 				case 3:
@@ -110,25 +114,35 @@ public class DanhSachNhanVien {
 		}
 	}
 
+	public NhanVien timKiemTheoTaiKhoan(String ten, String matkhau) {
+		for (NhanVien nv : arr) {
+			if (nv == null)
+				continue;
+			TaiKhoan tk = nv.getTaiKhoan();
+			if (tk.getTendangnhap().equals(ten) && tk.getMatkhau().equals(matkhau)) {
+				return nv;
+			}
+		}
+		return null;
+	}
+
 	public void timkiem(String maTimKiem) {
-		int flag = 0;
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] != null) {
 				if (arr[i].maNhanVien.equalsIgnoreCase(maTimKiem)) {
 					arr[i].xuat();
-					flag = 1;
+					return;
 				}
 			}
 		}
-		if (flag == 0) {
-			System.out.println("Không tìm thấy mã nhân viên trong danh sách !");
-		}
+		System.out.println("Không tìm thấy mã nhân viên trong danh sách !");
 	}
 
 	public void ThemNvPhucvu() {
 		System.out.println("Nhâp thông tin nhân viên cần thêm :");
 		NhanVien nv = new PhucVu();
 		nv.nhap();
+		nv.getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
 		arr = Arrays.copyOf(arr, arr.length + 1);
 		arr[n] = nv;
 		n++;
@@ -138,6 +152,7 @@ public class DanhSachNhanVien {
 		System.out.println("Nhâp thông tin nhân viên cần thêm :");
 		NhanVien nv = new QuanLi();
 		nv.nhap();
+		nv.getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
 		arr = Arrays.copyOf(arr, arr.length + 1);
 		arr[n] = nv;
 		n++;
@@ -224,7 +239,7 @@ public class DanhSachNhanVien {
 			fis = new FileInputStream("Nhanvien.txt");
 			ois = new ObjectInputStream(fis);
 			arr = (NhanVien[]) ois.readObject();
-			System.out.println("Đọc thành công .");
+			System.out.println("Đọc thành công danh sach nhan vien.");
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Khong tìm thấy file !!");

@@ -1,19 +1,29 @@
 package Net;
 
+import java.util.Scanner;
+
 public class BillChiTiet {
 	private String maBill;
 	private String ngayXuat;
 	private int soluong;
-	private ThucAn thucAn;
+	private ThucAn thucAn = new ThucAn();
+	Scanner sc = new Scanner(System.in);
 
 	public BillChiTiet() {
 		maBill = "";
 		ngayXuat = "";
 		soluong = 0;
-		thucAn = null;
+		thucAn = new ThucAn();
 	}
 
-	public BillChiTiet(int maBill, String ngayXuat, int soluong, ThucAn thucAn) {
+	public BillChiTiet(String maBill, String ngayXuat) {
+		this.maBill = maBill;
+		this.ngayXuat = ngayXuat;
+		thucAn = new ThucAn();
+		soluong = 0;
+	}
+
+	public BillChiTiet(String maBill, String ngayXuat, int soluong, ThucAn thucAn) {
 		this.maBill = maBill;
 		this.ngayXuat = ngayXuat;
 		this.soluong = soluong;
@@ -57,20 +67,14 @@ public class BillChiTiet {
 	}
 
 	public void nhap() {
-		System.out.print("Nhập mã Bill: ");
-		setMaBill(maBill);
-
-		System.out.print("Nhập ngày xuất: ");
-		setNgayXuat(sc.next());
-
-		System.out.print("Nhap thuc an: ");
+		System.out.println("Nhap thuc an: ");
 		thucAn.nhap();
-		System.out.print("Nhap so luong: ");
-		sc.nextInt(soluong);
+		System.out.println("Nhap so luong: ");
+		sc.nextInt();
 	}
 
 	public void xuat() {
-		System.out.println("Mã khách hàng: " + getMaKhachHang());
+		System.out.println("Mã bill : " + getMaBill());
 		System.out.println("Ngày xuất: " + getNgayXuat());
 		System.out.println("Đơn giá: " + getDonGia());
 		System.out.println("----------------------------");
@@ -78,7 +82,7 @@ public class BillChiTiet {
 
 	@Override
 	public String toString() {
-		return "BillChiTiet [maKhachHang=" + maKhachHang + ", ngayXuat=" + ngayXuat + ", donGia=" + getDonGia() + "]";
+		return "BillChiTiet [maBill=" + maBill + ", ngayXuat=" + ngayXuat + ", donGia=" + getDonGia() + "]";
 	}
 
 }

@@ -1,7 +1,9 @@
 package Net;
 
 import java.util.*;
-import java.time.LocalDate;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Bill {
 	private String maBill;
@@ -9,7 +11,8 @@ public class Bill {
 	private String maNhanVien;
 	private String ngayLap = "";
 	private int soGioChoi;
-	private int tongTien;
+	private int donGiaMoiGio;
+	private double tongTienThucAn;
 	private String trangThai = "Xuat";
 	private static int billID;
 	Scanner sc = new Scanner(System.in);
@@ -17,7 +20,11 @@ public class Bill {
 	public Bill() {
 		maBill = "Bill" + billID;
 		billID++;
-		ngayLap = " ";
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		ngayLap = sdf.format(date);
+		soGioChoi = 0;
+		tongTienThucAn = 0;
 	}
 
 	public String getMaBill() {
@@ -36,6 +43,20 @@ public class Bill {
 		return maNhanVien;
 	}
 
+	public void setMaNhanVien() {
+		System.out.println("nhap ma nhan vien");
+		while (true) {
+			maNhanVien = sc.nextLine();
+			maNhanVien = maNhanVien.toUpperCase();
+			if (checkLoi.checkMaNhanvien(maNhanVien)) {
+				break;
+			} else {
+				System.out.println("Định dạng mã Nhan viên: NV__. Ví dụ: NV01");
+			}
+			System.out.print("Mời nhập lại: ");
+		}
+	}
+
 	public void setMaNhanVien(String maNhanVien) {
 		this.maNhanVien = maNhanVien;
 	}
@@ -52,12 +73,20 @@ public class Bill {
 		this.soGioChoi = soGioChoi;
 	}
 
-	public int getTongTien() {
-		return tongTien;
+	public int getDonGiaMoiGio() {
+		return donGiaMoiGio;
 	}
 
-	public void setTongTien(int tongTien) {
-		this.tongTien = tongTien;
+	public void setDonGiaMoiGio(int donGiaMoiGio) {
+		this.donGiaMoiGio = donGiaMoiGio;
+	}
+
+	public double getTongTienThucAn() {
+		return tongTienThucAn;
+	}
+
+	public void setTongTienThucAn(double tongTienThucAn) {
+		this.tongTienThucAn = tongTienThucAn;
 	}
 
 	public String getTrangThai() {
@@ -68,8 +97,33 @@ public class Bill {
 		this.trangThai = trangThai;
 	}
 
+	public double tinhTien() {
+		return tongTienThucAn + soGioChoi * donGiaMoiGio;
+	}
+
 	public void huyBill() {
 		setTrangThai("Da Huy");
+	}
+
+	public void nhap() {
+		Scanner scan = new Scanner(System.in);
+		setMaNhanVien();
+		System.out.print("Nhap ma khach hang: ");
+		maKhachHang = sc.nextLine();
+		System.out.print("Nhap so gio choi:");
+		soGioChoi = sc.nextInt();
+		System.out.print("Nhap don gia moi gio choi:");
+		donGiaMoiGio = sc.nextInt();
+	}
+
+	public void xuat() {
+		System.out.println("Ma Bill: " + maBill);
+		System.out.println("Ma nhan vien : " + maNhanVien);
+		System.out.println("Ma khach hang: " + maKhachHang);
+		System.out.println("Ngay xuat: " + ngayLap);
+		System.out.println("So gio choi: " + soGioChoi);
+		System.out.println("Don gia: " + tinhTien());
+		System.out.println("Trang thai: " + trangThai);
 	}
 
 	@Override
@@ -77,11 +131,7 @@ public class Bill {
 		return "Bill [maBill= " + maBill + ", Ngay xuat= " + ngayLap + ", Nhan vien xuat bill= " + maNhanVien
 				+ ", maKhachHang = " + maKhachHang
 				+ ", soGioChoi= " + soGioChoi
-				+ ",Tong tien = " + tongTien + ", Trang Thai: " + trangThai + "]";
+				+ ",Tong tien = " + tinhTien() + ", Trang Thai: " + trangThai + "]";
 	}
 
-	public static void main(String args[]) {
-		Bill b = new Bill();
-		System.out.println(b);
-	}
 }

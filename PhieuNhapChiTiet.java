@@ -1,31 +1,29 @@
 package Net;
 
-public class PhieuNhapChiTiet extends PhieuNhapThucAn {
-	public String nhaPhanPhoi;
-	public String ngayNhap;
+import java.util.Scanner;
+
+public class PhieuNhapChiTiet {
+	private String maPhieuNhap;
+	private String ngayNhap;
+	private ThucAn thucAn;
+	private int soluong;
+	private Scanner sc = new Scanner(System.in);
 
 	public PhieuNhapChiTiet() {
+
 	}
 
-	public PhieuNhapChiTiet(int maPhieuNhap, int donGia, DanhSachThucAn dsTA, String nhaPhanPhoi, String ngayNhap) {
-		super(maPhieuNhap, donGia, dsTA);
-		this.nhaPhanPhoi = nhaPhanPhoi;
+	public PhieuNhapChiTiet(String maPhieuNhap, String ngayNhap) {
+		this.maPhieuNhap = maPhieuNhap;
 		this.ngayNhap = ngayNhap;
+		thucAn = new ThucAn();
 	}
 
-	public String getNhaPhanPhoi() {
-		return nhaPhanPhoi;
-	}
-
-	public void setNhaPhanPhoi(String nhaPhanPhoi) {
-		this.nhaPhanPhoi = nhaPhanPhoi;
-	}
-
-	public int getMaPhieuNhap() {
+	public String getMaPhieuNhap() {
 		return maPhieuNhap;
 	}
 
-	public void setMaPhieuNhap(int maPhieuNhap) {
+	public void setMaPhieuNhap(String maPhieuNhap) {
 		this.maPhieuNhap = maPhieuNhap;
 	}
 
@@ -37,35 +35,35 @@ public class PhieuNhapChiTiet extends PhieuNhapThucAn {
 		this.ngayNhap = ngayNhap;
 	}
 
-	public double getDonGia() {
-		return donGia;
+	public ThucAn getThucAn() {
+		return thucAn;
 	}
 
-	public void setDonGia(double donGia) {
-		this.donGia = donGia;
+	public void setThucAn(ThucAn thucAn) {
+		this.thucAn = thucAn;
+	}
+
+	public double getDonGia() {
+		return thucAn.getDonGia() * soluong;
 	}
 
 	public void nhap() {
-		super.nhap();
-		System.out.print("Nhập Nhà Phân Phối: ");
-		setNhaPhanPhoi(sc.nextInt());
-
-		System.out.print("Nhập ngày nhập: ");
-		setNgayXuat(sc.next());
-
-		System.out.print("Nhập đơn giá: ");
-		setDonGia(sc.nextDouble());
+		thucAn.nhap();
+		System.out.println("Nhap so luong: ");
+		soluong = sc.nextInt();
 	}
 
 	public void xuat() {
-		super.xuat();
-		System.out.println("Nhà Phân Phối: " + getNhaPhanPhoi());
-		System.out.println("Ngày Nhập: " + getNgayNhap());
-		System.out.println("Đơn giá: " + getDonGia());
-		System.out.println("----------------------------");
+		System.out.println("Thong tin phieu nhap chi tiet");
+		System.out.println("Ma phieu nhap: " + maPhieuNhap);
+		System.out.println("Ngay nhap: " + ngayNhap);
+		System.out.println("Thuc An : " + thucAn.toString());
+		System.out.println("So luong: " + soluong);
 	}
 
 	@Override
 	public String toString() {
-		return "PhieuNhapChiTiet [nhaPhanPhoi=" + nhaPhanPhoi + ", ngayNhap=" + ngayNhap + ", donGia=" + donGia + "]";
+		return "[Ma phieu nhap: " + maPhieuNhap + ", Ngay nhap: " + ngayNhap + ",Thuc An: " + thucAn.toString()
+				+ ", So luong: " + soluong + "]";
 	}
+}

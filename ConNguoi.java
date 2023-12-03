@@ -6,20 +6,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+import Net.TaiKhoan;
+
 public class ConNguoi implements Serializable {
 
 	protected String hoTen;
 	protected String diaChi;
 	protected String soDienThoai;
 	protected String ngaySinh;
-	protected String taiKhoan;
+	protected TaiKhoan taiKhoan;
 	private transient Scanner sc = new Scanner(System.in);
 
-	public ConNguoi(String hoTen, String diaChi, String soDienThoai, String ngaySinh) {
+	public ConNguoi(String hoTen, String diaChi, String ngaySinh, String soDienThoai, TaiKhoan taiKhoan) {
 		this.hoTen = hoTen;
 		this.diaChi = diaChi;
 		this.soDienThoai = soDienThoai;
 		this.ngaySinh = ngaySinh;
+		this.taiKhoan = taiKhoan;
 	}
 
 	public ConNguoi() {
@@ -27,7 +30,7 @@ public class ConNguoi implements Serializable {
 		diaChi = " ";
 		soDienThoai = " ";
 		ngaySinh = " ";
-		taiKhoan = " ";
+		taiKhoan = new TaiKhoan();
 	}
 
 	public String getHoTen() {
@@ -106,11 +109,11 @@ public class ConNguoi implements Serializable {
 		}
 	}
 
-	public String getTaiKhoan() {
+	public TaiKhoan getTaiKhoan() {
 		return taiKhoan;
 	}
 
-	public void setTaiKhoan(String taiKhoan) {
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
 		this.taiKhoan = taiKhoan;
 	}
 
@@ -123,6 +126,7 @@ public class ConNguoi implements Serializable {
 		setSoDienThoai();
 		System.out.println("Nhập ngày sinh :");
 		setNgaySinh();
+		taiKhoan.nhap();
 	}
 
 	public void xuat() {
@@ -130,13 +134,14 @@ public class ConNguoi implements Serializable {
 		System.out.println("Địa chỉ :" + diaChi);
 		System.out.println("Số điện thoại :" + soDienThoai);
 		System.out.println("Ngày sinh :" + ngaySinh);
+		taiKhoan.xuat();
 	}
 
 	@Override
 	public String toString() {
 		return "ConNguoi [ Họ tên :" + hoTen + ", Địa chỉ :" + diaChi + ",Số điện thoại :" + soDienThoai
 				+ ", Ngày sinh :"
-				+ ngaySinh + "]";
+				+ ngaySinh + ", Tai khoan : " + taiKhoan + "]";
 	}
 
 }

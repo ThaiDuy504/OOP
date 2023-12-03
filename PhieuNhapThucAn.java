@@ -1,65 +1,113 @@
 package Net;
 
 import java.util.Scanner;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class PhieuNhapThucAn {
-	private int maPhieuNhap;
-	private int donGia;
-	private DanhSachThucAn dsTA;
+	private NhaPhanPhoi nhaPhanPhoi;
+	private String maNhanVien;
+	private String maPhieuNhap;
+	private String ngayNhap;
+	private double donGia;
+	private String tinhTrang = "xuat";
+	private static int phieuNhapID = 0;
 	Scanner sc = new Scanner(System.in);
 
 	public PhieuNhapThucAn() {
+		maPhieuNhap = "PNHAP" + (phieuNhapID++);
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		ngayNhap = sdf.format(d);
+		donGia = 0;
 	}
 
-	public PhieuNhapThucAn(int maPhieuNhap, int donGia, DanhSachThucAn dsTA) {
-		this.maPhieuNhap = maPhieuNhap;
-		this.donGia = donGia;
-		this.dsTA = dsTA;
+	public NhaPhanPhoi getNhaPhanPhoi() {
+		return nhaPhanPhoi;
 	}
 
-	public int getMaPhieuNhap() {
+	public void setNhaPhanPhoi(NhaPhanPhoi nhaPhanPhoi) {
+		this.nhaPhanPhoi = nhaPhanPhoi;
+	}
+
+	public String getMaNhanVien() {
+		return maNhanVien;
+	}
+
+	public void setMaNhanVien() {
+		while (true) {
+			maNhanVien = sc.nextLine();
+			maNhanVien = maNhanVien.toUpperCase();
+			if (checkLoi.checkMaNhanvien(maNhanVien)) {
+				break;
+			} else {
+				System.out.println("Định dạng mã Nhan viên: NV__. Ví dụ: NV01");
+			}
+			System.out.print("Mời nhập lại: ");
+		}
+	}
+
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
+	}
+
+	public String getMaPhieuNhap() {
 		return maPhieuNhap;
 	}
 
-	public void setMaPhieuNhap(int maPhieuNhap) {
+	public void setMaPhieuNhap(String maPhieuNhap) {
 		this.maPhieuNhap = maPhieuNhap;
 	}
 
-	public int getDonGia() {
+	public String getNgayNhap() {
+		return ngayNhap;
+	}
+
+	public void setNgayNhap(String ngayNhap) {
+		this.ngayNhap = ngayNhap;
+	}
+
+	public double getDonGia() {
 		return donGia;
 	}
 
-	public void setDonGia(int donGia) {
+	public void setDonGia(double donGia) {
 		this.donGia = donGia;
 	}
 
-	public DanhSachThucAn getDsTA() {
-		return dsTA;
+	public static int getPhieuNhapID() {
+		return phieuNhapID;
 	}
 
-	public void setDsTA(DanhSachThucAn dsTA) {
-		this.dsTA = dsTA;
+	public static void setPhieuNhapID(int phieuNhapID) {
+		PhieuNhapThucAn.phieuNhapID = phieuNhapID;
+	}
+
+	public void huyPhieuNhap() {
+		tinhTrang = "Da Huy";
 	}
 
 	public void nhap() {
-		System.out.print("Nhập mã phiếu nhập:");
-		setMaPhieuNhap(sc.nextInt());
-		System.out.print("Nhập đơn giá:");
-		setDonGia(sc.nextInt());
-		dsTA.nhapdsThucAn();
+		nhaPhanPhoi.nhap();
+		setMaNhanVien();
 	}
 
 	public void xuat() {
-		System.out.println("Mã Phiếu Nhập: " + getMaPhieuNhap());
-		System.out.println("Đơn Giá: " + getDonGia());
-		System.out.println("Danh sách thức ăn: ");
-		dsTA.xuatdsThucAn();
-		System.out.println("----------------------------");
+		System.out.println("Phieu nhap chi tiet");
+		System.out.println("Ma phieu nhap: " + maPhieuNhap);
+		nhaPhanPhoi.xuat();
+		System.out.println("Ma nhan vien: " + maNhanVien);
+		System.out.println("Ngay xuat: " + ngayNhap);
+		System.out.println("Don gia: " + donGia);
+		System.out.println("Trang thai: " + tinhTrang);
 	}
 
 	@Override
 	public String toString() {
-		return "PhieuNhapThucAn  [maPhieuNhap=" + maPhieuNhap + ", donGia=" + donGia + "]";
+		return "[Ma phieu nhap: " + maPhieuNhap + ",Nha phan phoi : " + nhaPhanPhoi + ", Ma nhan vien: " + maNhanVien
+				+ "Ngay Xuat: " + ngayNhap
+				+ ", Don gia: " + donGia + ", Trang Thai: " + tinhTrang + "]";
 	}
 
 }

@@ -3,14 +3,18 @@ package Net;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import Net.TaiKhoan;
+import Net.checkLoi;
+
 public abstract class NhanVien extends ConNguoi implements Serializable {
 	protected String maNhanVien;
 	protected double heSoLuong;
 	private transient Scanner sc = new Scanner(System.in);
 
 	public NhanVien(String maNhanVien, String hoTen, String diaChi, String soDienThoai, String ngaySinh,
+			TaiKhoan taiKhoan,
 			double heSoLuong) {
-		super(hoTen, diaChi, soDienThoai, ngaySinh);
+		super(hoTen, diaChi, soDienThoai, ngaySinh, taiKhoan);
 		// TODO Auto-generated constructor stub
 		this.maNhanVien = maNhanVien;
 		this.heSoLuong = heSoLuong;
@@ -30,7 +34,7 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 		while (true) {
 			maNhanVien = sc.nextLine();
 			maNhanVien = maNhanVien.toUpperCase();
-			if (maNhanVien.matches("NV" + "[0-9]{1,2}")) {
+			if (checkLoi.checkMaNhanvien(maNhanVien)) {
 				break;
 			} else {
 				System.out.println("Định dạng mã Nhan viên: NV__. Ví dụ: NV01");

@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 public class DanhSachThucAn {
     private int n;
-    ThucAn[] arrta;
-    Scanner sc = new Scanner(System.in);
+    private ThucAn[] arrta = new ThucAn[100];
+    private Scanner sc = new Scanner(System.in);
 
-    DanhSachThucAn() {
+    public DanhSachThucAn() {
         arrta = null;
         n = 0;
     }
@@ -91,9 +91,9 @@ public class DanhSachThucAn {
     public ThucAn timkiemThucAn() {
         System.out.println("\n---------- Tìm kiếm thức ăn ----------");
         System.out.print("Nhập vào mã thức ăn cần tìm:");
-        int mta = sc.nextInt();
+        String mta = sc.nextLine();
         for (int i = 0; i < arrta.length; i++)
-            if (arrta[i].getMaThucAn() == mta)
+            if (arrta[i].getMaThucAn().equals(mta))
                 return arrta[i];
         return null;
     }
@@ -110,11 +110,11 @@ public class DanhSachThucAn {
     public void xoaThucAn() {
         System.out.println("\n---------- Xóa thức ăn ----------");
         System.out.print("Nhập mã thức ăn cần xóa:");
-        int mta = sc.nextInt();
+        String mta = sc.nextLine();
         int index = -1;
 
         for (int i = 0; i < arrta.length; i++) {
-            if (arrta[i].getMaThucAn() == mta) {
+            if (arrta[i].getMaThucAn().equals(mta)) {
                 index = i;
                 break;
             }
@@ -134,9 +134,9 @@ public class DanhSachThucAn {
     public void suaThucAn() {
         System.out.println("\n---------- Sửa thức ăn ----------");
         System.out.print("Nhập mã thức ăn cần sửa:");
-        int mta = sc.nextInt();
+        String mta = sc.nextLine();
         for (int i = 0; i < arrta.length; i++) {
-            if (arrta[i].getMaThucAn() == mta) {
+            if (arrta[i].getMaThucAn().equals(mta)) {
                 System.out.println("Nhập thông tin thức ăn mới:");
                 arrta[i].nhap();
                 break;
@@ -165,11 +165,7 @@ public class DanhSachThucAn {
             if (arrta == null) {
                 System.out.println("Danh sách thức ăn trống.");
             } else {
-                for (int i = 0; i < arrta.length; i++) {
-                    if (arrta[i] != null) {
-                        arrta[i].xuat();
-                    }
-                }
+                System.out.println("da doc xong danh sach thuc an");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -9,14 +9,17 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import Net.KhachHang;
+import Net.QuyenHanKhachHang;
+
 public class DanhSachKhachHang {
-	KhachHang[] arr;
-	int n;
-	int count = 0;
+	KhachHang[] arr = new KhachHang[10000];
+	transient int n;
+	transient int count = 0;
 
 	public DanhSachKhachHang() {
 		n = 0;
-		arr = null;
+		arr = new KhachHang[1];
 	}
 
 	public void luachon() {
@@ -24,7 +27,7 @@ public class DanhSachKhachHang {
 		int x;
 		System.out.println("Nhập số lượng khách hàng cần nhập ban đầu: ");
 		n = Integer.parseInt(sc.nextLine());
-		arr = new NhanVien[n];
+		arr = new KhachHang[n];
 		boolean flag = true;
 		outer: while (flag) {
 			System.out.println("----------------Nhập lựa chọn-------------");
@@ -32,10 +35,9 @@ public class DanhSachKhachHang {
 			System.out.println("2.Thêm một Khách Hàng. ");
 			System.out.println("3.Xoá một Khách Hàng. ");
 			System.out.println("4.Xuất danh sách Khách Hàng.");
-			System.out.println("5.Xuất danh sách điểm tích lũy của Khách Hàng.");
-			System.out.println("6.Ghi file danh sách Khách Hàng. ");
-			System.out.println("7.Đọc file danh sách Khách Hàng. ");
-			System.out.println("8.Thoát khỏi chương trình.");
+			System.out.println("5.Ghi file danh sách Khách Hàng. ");
+			System.out.println("6.Đọc file danh sách Khách Hàng. ");
+			System.out.println("7.Thoát khỏi chương trình.");
 			x = Integer.parseInt(sc.nextLine());
 			switch (x) {
 				case 1:
@@ -47,16 +49,7 @@ public class DanhSachKhachHang {
 					String choice;
 					do {
 						System.out.println("Thêm Khách Hàng ");
-						int c = Integer.parseInt(sc.nextLine());
-
-						switch (c) {
-							case 1:
-								ThemKhachHang();
-								break;
-							default:
-								System.out.println("Lựa chọn không hợp lệ");
-								break;
-						}
+						ThemKhachHang();
 						System.out.println("Bạn có muốn tiếp tục thêm hay không (y/n)?");
 						choice = sc.nextLine();
 						if (choice.equalsIgnoreCase("n")) {
@@ -73,15 +66,12 @@ public class DanhSachKhachHang {
 					XuatDanhSachKH();
 					break;
 				case 5:
-					TinhDiemTichLuy();
-					break;
-				case 6:
 					ghifile();
 					break;
-				case 7:
+				case 6:
 					docfile();
 					break;
-				case 8:
+				case 7:
 					flag = false;
 					break;
 				default:
@@ -89,28 +79,46 @@ public class DanhSachKhachHang {
 					break;
 			}
 		}
+
+	}
+
+	public KhachHang timKiemTheoTaiKhoan(String ten, String matkhau) {
+		for (KhachHang kh : arr) {
+			if (kh == null)
+				continue;
+			TaiKhoan tk = kh.getTaiKhoan();
+			if (tk.getTendangnhap().equals(ten) && tk.getMatkhau().equals(matkhau)) {
+				return kh;
+			}
+		}
+		return null;
 	}
 
 	public void timkiem(String maTimKiem) {
-		int flag = 0;
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] != null) {
-				if (arr[i].maKhachHang.equalsIgnoreCase(maTimKiem)) {
+				if (arr[i].getMaKhachHang().equalsIgnoreCase(maTimKiem)) {
 					arr[i].xuat();
-					flag = 1;
+					return;
 				}
 			}
 		}
-		if (flag == 0) {
-			System.out.println("Không tìm thấy mã Khách Hàng trong danh sách !");
-		}
+		System.out.println("Không tìm thấy mã Khách Hàng trong danh sách !");
 	}
 
 	public void ThemKhachHang() {
 		System.out.println("Nhâp thông tin Khách Hàng cần thêm :");
 		KhachHang nv = new KhachHang();
 		nv.nhap();
-		arr = Arrays.copyOf(arr, arr.length + 1);
+		nv.getTaiKhoan().setQuyenhan(new QuyenHanKhachHang());
+		for (KhachHang kh : arr) {
+			if (kh != null && kh.getMaKhachHang().equals(nv.getMaKhachHang())) {
+				System.out.println("Ma khach hang da ton tai");
+				return;
+			}
+		}
+		if (n == arr.length)
+			arr = Arrays.copyOf(arr, arr.length + 1);
 		arr[n] = nv;
 		n++;
 	}
@@ -118,9 +126,9 @@ public class DanhSachKhachHang {
 	public void XoaKhachHang(String maKhachHang) {
 		int flag = 0;
 		int index = -1;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < n; i++) {
 			if (arr[i] != null) {
-				if (arr[i].maKhachHang.equalsIgnoreCase(maKhachHang)) {
+				if (arr[i].getMaKhachHang().equalsIgnoreCase(maKhachHang)) {
 					index = i;
 					flag = 1;
 					break;
@@ -142,19 +150,8 @@ public class DanhSachKhachHang {
 	public void XuatDanhSachKH() {
 		System.out.println("--------------Danh Sách Khách Hàng----------------- ");
 		for (KhachHang khachHang : arr) {
-			if (khachHang instanceof DanhSachKhachHang) {
+			if (khachHang != null)
 				khachHang.xuat();
-			}
-		}
-	}
-
-	public void TinhDiemTichLuy() {
-		System.out.println("---------Danh sách điểm của từng Khách Hàng------");
-		for (KhachHang khachHang : arr) {
-			// ???
-			if (khachHang != null) {
-				System.out.println(khachHang.TinhDiemTichLuy());
-			}
 		}
 	}
 
@@ -191,12 +188,7 @@ public class DanhSachKhachHang {
 			fis = new FileInputStream("KhachHang.dat");
 			ois = new ObjectInputStream(fis);
 			arr = (KhachHang[]) ois.readObject();
-
-			for (int i = 0; i < arr.length; i++) {
-				if (arr[i] != null) {
-					arr[i].xuat();
-				}
-			}
+			System.out.println("doc file danh sach khach hang thanh cong");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
