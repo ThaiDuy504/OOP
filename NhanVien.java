@@ -37,9 +37,9 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 			if (checkLoi.checkMaNhanvien(maNhanVien)) {
 				break;
 			} else {
-				System.out.println("Định dạng mã Nhan viên: NV__. Ví dụ: NV01");
+				System.out.println("Dinh dang ma nhan vien: NV__. Vi du : NV01");
 			}
-			System.out.print("Mời nhập lại: ");
+			System.out.print("Moi nhap lai: ");
 		}
 	}
 
@@ -54,10 +54,10 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 				if (heSoLuong >= 0) {
 					break;
 				} else {
-					System.out.print("Hệ số lương không hợp lệ ! Mời nhập lại: ");
+					System.out.print("He so luong khong hop le ! Moi nhap lai: ");
 				}
 			} catch (NumberFormatException exception) {
-				System.out.print(" Hệ số lương không đúng định dạng ! Mời nhập lại: ");
+				System.out.print(" He so luong khong dung dinh dang ! Moi nhap lai: ");
 			}
 		}
 	}
@@ -65,18 +65,18 @@ public abstract class NhanVien extends ConNguoi implements Serializable {
 	public abstract String TinhLuong();
 
 	public void nhap() {
-		System.out.println("-------------Nhập nhân viên-----------");
-		System.out.println("Nhập mã nhân viên :");
+		System.out.println("-------------Nhap nhan vien-----------");
+		System.out.println("Nhap ma nhan vien :");
 		setMaNhanVien();
 		super.nhap();
-		System.out.println("Nhập hệ số lương :");
+		System.out.println("Nhap he so luong:");
 		setHeSoLuong();
 	}
 
 	public void xuat() {
-		System.out.println("---------Xuất thông tin nhân viên-------");
-		System.out.println("Mã nhân viên :" + maNhanVien);
+		System.out.println("---------Xuat thong tin nhan vien-------");
+		System.out.println("Ma nhan vien :" + maNhanVien);
 		super.xuat();
-		System.out.println("Hệ số lương :" + heSoLuong);
+		System.out.println("He so luong:" + heSoLuong);
 	}
 }
