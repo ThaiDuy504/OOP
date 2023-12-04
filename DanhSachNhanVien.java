@@ -53,6 +53,7 @@ public class DanhSachNhanVien {
 				case 2:
 					System.out.println("Nhập nhân viên (Quản lí) " + "(" + (count + 1) + "/" + n + ")");
 					arr[count] = new QuanLi();
+					arr[count].nhap();
 					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
 					count++;
 					break;
