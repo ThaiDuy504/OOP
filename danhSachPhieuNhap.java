@@ -33,19 +33,54 @@ public class danhSachPhieuNhap {
         this.dsPhieuNhap = dsPhieuNhap;
     }
 
-    public void nhapPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap so luong phieu nhap can nhap: ");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; ++i) {
-            System.out.println("Nhap phieu nhap thu " + (i + 1) + ":");
-            PhieuNhapThucAn phieunhap = new PhieuNhapThucAn();
-            phieunhap.nhap();
-            double tongTien = dsPhieuNhapChiTiet.nhapPhieuNhapChiTiet(phieunhap.getMaPhieuNhap(),
-                    phieunhap.getNgayNhap());
-            phieunhap.setDonGia(tongTien);
-            dsPhieuNhap.add(phieunhap);
+    public void nhapPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet, boolean nhapThucAn) {
+        Scanner scanner = new Scanner(System.in);
+    
+        System.out.println("Nhập mã phiếu nhập: ");
+        String maPhieuNhap = scanner.nextLine();
+    
+        System.out.println("Nhập ngày nhập (dd/mm/yyyy): ");
+        String ngayNhap = scanner.nextLine();
+    
+        System.out.println("Nhập số lượng: ");
+        int soLuong = scanner.nextInt();
+        scanner.nextLine(); 
+    
+        // Kiểm tra lựa chọn nhập thức ăn hay thiết bị
+        if (nhapThucAn) {
+            System.out.println("Nhập mã thức ăn: ");
+            String maThucAn = scanner.nextLine();
+    
+            // Kiểm tra xem thức ăn đã tồn tại trong danh sách chưa
+            boolean daTonTai = dsPhieuNhapChiTiet.kiemTraTonTaiThucAn(maThucAn);
+    
+            if (daTonTai) {
+                dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong);
+            } else {
+                ThucAn thucAn = new ThucAn(maThucAn);
+                dsPhieuNhapChiTiet.themThucAn(thucAn);
+                dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong);
+            }
+        } else {
+            System.out.println("Nhập mã thiết bị: ");
+            String maThietBi = scanner.nextLine();
+    
+            // Kiểm tra xem thiết bị đã tồn tại trong danh sách chưa
+            boolean daTonTai = dsPhieuNhapChiTiet.kiemTraTonTaiThietBi(maThietBi);
+    
+            if (daTonTai) {
+                dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong);
+            } else {
+                ThietBi thietBi = new ThietBi(maThietBi);
+                dsPhieuNhapChiTiet.themThietBi(thietBi);
+                dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong);
+            }
         }
+    
+        PhieuNhapThucAn phieuNhap = new PhieuNhapThucAn(maPhieuNhap, ngayNhap, soLuong);
+        dsPhieuNhap.add(phieuNhap);
+    
+        System.out.println("Phiếu nhập đã được thêm vào danh sách.");
     }
 
     public void themPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {
