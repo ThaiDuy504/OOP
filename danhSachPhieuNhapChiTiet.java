@@ -13,9 +13,14 @@ import java.util.logging.Logger;
 
 public class danhSachPhieuNhapChiTiet {
     ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet = new ArrayList<>();
+    private ArrayList<ThucAn> dsThucAn;
+    private ArrayList<ThietBi> dsThietBi;
+
 
     public danhSachPhieuNhapChiTiet() {
         dsPhieuNhapChiTiet = new ArrayList<>();
+        dsThucAn = new ArrayList<>();
+        dsThietBi = new ArrayList<>();
     }
 
     public danhSachPhieuNhapChiTiet(ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet) {
@@ -28,6 +33,49 @@ public class danhSachPhieuNhapChiTiet {
 
     public void setDsPhieuNhapChiTiet(ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet) {
         this.dsPhieuNhapChiTiet = dsPhieuNhapChiTiet;
+    }
+     public void themThucAn(ThucAn thucAn) {
+        dsThucAn.add(thucAn);
+    }
+
+    public void themThietBi(ThietBi thietBi) {
+        dsThietBi.add(thietBi);
+    }
+
+    public boolean kiemTraTonTaiThucAn(String maThucAn) {
+        for (ThucAn thucAn : dsThucAn) {
+            if (thucAn.getMaThucAn().equals(maThucAn)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean kiemTraTonTaiThietBi(String maThietBi) {
+        for (ThietBi thietBi : dsThietBi) {
+            if (thietBi.getMaThietBi().equals(maThietBi)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void capNhatSoLuongThucAn(String maThucAn, int soLuong) {
+        for (ThucAn thucAn : dsThucAn) {
+            if (thucAn.getMaThucAn().equals(maThucAn)) {
+                thucAn.setSoLuong(thucAn.getSoLuong() + soLuong);
+                return;
+            }
+        }
+    }
+
+    public void capNhatSoLuongThietBi(String maThietBi, int soLuong) {
+        for (ThietBi thietBi : dsThietBi) {
+            if (thietBi.getMaThietBi().equals(maThietBi)) {
+                thietBi.setSoLuong(thietBi.getSoLuong() + soLuong);
+                return;
+            }
+        }
     }
 
     public double nhapPhieuNhapChiTiet(String maPhieuNhap, String ngayXuat) {
