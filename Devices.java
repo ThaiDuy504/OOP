@@ -4,21 +4,26 @@ import java.util.Scanner;
 
 public class Devices {
     Scanner sc = new Scanner(System.in);
-    private NhaPhanPhoi nhaPhanPhoi;
+    private NhaPhanPhoi nhaPhanPhoi = new NhaPhanPhoi();
     private String MaThietBi;
     private String TenThietBi;
     private String LoaiThietBi;
+    private int soluong;
+    private double donGia;
     private int BaoHanh;
 
     public Devices() {
     }
 
-    public Devices(NhaPhanPhoi nhaPhanPhoi, String maThietBi, String tenThietBi, String loaiThietBi, int baoHanh) {
+    public Devices(NhaPhanPhoi nhaPhanPhoi, String maThietBi, String tenThietBi, String loaiThietBi, int soluong,
+            double donGia, int baoHanh) {
         this.nhaPhanPhoi = nhaPhanPhoi;
-        MaThietBi = maThietBi;
-        TenThietBi = tenThietBi;
-        LoaiThietBi = loaiThietBi;
-        BaoHanh = baoHanh;
+        this.MaThietBi = maThietBi;
+        this.TenThietBi = tenThietBi;
+        this.LoaiThietBi = loaiThietBi;
+        this.soluong = soluong;
+        this.donGia = donGia;
+        this.BaoHanh = baoHanh;
     }
 
     public Devices(Devices a) {
@@ -26,6 +31,8 @@ public class Devices {
         this.MaThietBi = a.MaThietBi;
         this.TenThietBi = a.TenThietBi;
         this.LoaiThietBi = a.LoaiThietBi;
+        this.soluong = a.soluong;
+        this.donGia = a.donGia;
         this.BaoHanh = a.BaoHanh;
     }
 
@@ -83,6 +90,33 @@ public class Devices {
         BaoHanh = baoHanh;
     }
 
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong() {
+        System.out.println("Nhap so luong: ");
+        Scanner sc = new Scanner(System.in);
+        int soluong = sc.nextInt();
+        while (soluong <= 0) {
+            System.out.println("So luong khong hop le moi nhap lai: ");
+            soluong = sc.nextInt();
+        }
+        setSoluong(soluong);
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = Math.max(0, donGia);
+    }
+
     public void nhap() {
         nhaPhanPhoi.nhap();
         setMaThietBi();
@@ -92,6 +126,22 @@ public class Devices {
         LoaiThietBi = sc.nextLine();
         System.out.println("nhap vao thoi luong bao hanh : ");
         BaoHanh = sc.nextInt();
+        setSoluong();
+        System.out.print("Nhap don gia: ");
+        setDonGia(sc.nextDouble());
+    }
+
+    public void nhap(String identify) {
+        nhaPhanPhoi.nhap();
+        System.out.println("nhap vao ten thiet bi : ");
+        TenThietBi = sc.nextLine();
+        System.out.println("nhap vao loai thiet bi : ");
+        LoaiThietBi = sc.nextLine();
+        System.out.println("nhap vao thoi luong bao hanh : ");
+        BaoHanh = sc.nextInt();
+        setSoluong();
+        System.out.print("Nhap don gia: ");
+        setDonGia(sc.nextDouble());
     }
 
     public void xuat() {
@@ -100,12 +150,16 @@ public class Devices {
         System.out.println("ten thiet bi la : " + TenThietBi);
         System.out.println("loai thiet bi la : " + LoaiThietBi);
         System.out.println("thoi luong bao hanh la: " + BaoHanh);
+        System.out.println("So luong: " + soluong);
+        System.out.println("Don gia: " + donGia);
     }
 
     @Override
     public String toString() {
         return "[Nha phan phoi= " + nhaPhanPhoi.toString() + ", Ma thiet bi= " + MaThietBi + ", Ten thiet bi= "
                 + TenThietBi
-                + ", Loai thiet bi = " + LoaiThietBi + ", Thoi gian bao hanh = " + BaoHanh + "]";
+                + ", Loai thiet bi = " + LoaiThietBi + ", So luong: " + soluong + ",Don gia: " + donGia
+                + ", Thoi gian bao hanh = " + BaoHanh
+                + "]";
     }
 }

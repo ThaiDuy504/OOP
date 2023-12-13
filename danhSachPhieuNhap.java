@@ -11,82 +11,98 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Net.DanhSachThucAn;
 import Net.PhieuNhapThucAn;
 import Net.danhSachPhieuNhapChiTiet;
+import Net.danhSachThietBi;
 
 public class danhSachPhieuNhap {
-    ArrayList<PhieuNhapThucAn> dsPhieuNhap = new ArrayList<>();
+    ArrayList<PhieuNhap> dsPhieuNhap = new ArrayList<>();
 
     public danhSachPhieuNhap() {
         dsPhieuNhap = new ArrayList<>();
     }
 
-    public danhSachPhieuNhap(ArrayList<PhieuNhapThucAn> dsPhieuNhap) {
+    public danhSachPhieuNhap(ArrayList<PhieuNhap> dsPhieuNhap) {
         this.dsPhieuNhap = dsPhieuNhap;
     }
 
-    public ArrayList<PhieuNhapThucAn> getDsPhieuNhap() {
+    public ArrayList<PhieuNhap> getDsPhieuNhap() {
         return dsPhieuNhap;
     }
 
-    public void setDsPhieuNhap(ArrayList<PhieuNhapThucAn> dsPhieuNhap) {
+    public void setDsPhieuNhap(ArrayList<PhieuNhap> dsPhieuNhap) {
         this.dsPhieuNhap = dsPhieuNhap;
     }
 
-    public void nhapPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet, boolean nhapThucAn) {
-        Scanner scanner = new Scanner(System.in);
-    
-        System.out.println("Nhập mã phiếu nhập: ");
-        String maPhieuNhap = scanner.nextLine();
-    
-        System.out.println("Nhập ngày nhập (dd/mm/yyyy): ");
-        String ngayNhap = scanner.nextLine();
-    
-        System.out.println("Nhập số lượng: ");
-        int soLuong = scanner.nextInt();
-        scanner.nextLine(); 
-    
-        // Kiểm tra lựa chọn nhập thức ăn hay thiết bị
-        if (nhapThucAn) {
-            System.out.println("Nhập mã thức ăn: ");
-            String maThucAn = scanner.nextLine();
-    
-            // Kiểm tra xem thức ăn đã tồn tại trong danh sách chưa
-            boolean daTonTai = dsPhieuNhapChiTiet.kiemTraTonTaiThucAn(maThucAn);
-    
-            if (daTonTai) {
-                dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong);
-            } else {
-                ThucAn thucAn = new ThucAn(maThucAn);
-                dsPhieuNhapChiTiet.themThucAn(thucAn);
-                dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong);
-            }
-        } else {
-            System.out.println("Nhập mã thiết bị: ");
-            String maThietBi = scanner.nextLine();
-    
-            // Kiểm tra xem thiết bị đã tồn tại trong danh sách chưa
-            boolean daTonTai = dsPhieuNhapChiTiet.kiemTraTonTaiThietBi(maThietBi);
-    
-            if (daTonTai) {
-                dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong);
-            } else {
-                ThietBi thietBi = new ThietBi(maThietBi);
-                dsPhieuNhapChiTiet.themThietBi(thietBi);
-                dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong);
-            }
+    // public void nhapPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet,
+    // DanhSachThucAn dsThucAn,
+    // danhSachThietBi dsThietBi, boolean nhapThucAn) {
+    // Scanner scanner = new Scanner(System.in);
+
+    // PhieuNhap phieuNhap = new PhieuNhap();
+    // int soLuong = 0;
+
+    // // Kiểm tra lựa chọn nhập thức ăn hay thiết bị
+    // if (nhapThucAn) {
+    // ThucAn thucAn = new ThucAn();
+    // thucAn.setMaThucAn();
+    // // Kiểm tra xem thức ăn đã tồn tại trong danh sách chưa
+    // boolean daTonTai =
+    // dsPhieuNhapChiTiet.kiemTraTonTaiThucAn(thucAn.getMaThucAn(), dsThucAn);
+    // if (daTonTai) {
+    // System.out.println("Nhap so luong: ");
+    // int soluong = Integer.parseInt(sc.nextLine());
+    // dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong, dsThucAn);
+    // } else {
+    // thucAn.nhap("");
+    // dsPhieuNhapChiTiet.themThucAn(thucAn);
+    // dsPhieuNhapChiTiet.capNhatSoLuongThucAn(maThucAn, soLuong, dsThucAn);
+    // }
+    // } else {
+    // System.out.println("Nhập mã thiết bị: ");
+    // String maThietBi = scanner.nextLine();
+
+    // // Kiểm tra xem thiết bị đã tồn tại trong danh sách chưa
+    // boolean daTonTai = dsPhieuNhapChiTiet.kiemTraTonTaiThietBi(maThietBi,
+    // dsThietBi);
+
+    // if (daTonTai) {
+    // dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong, dsThietBi);
+    // } else {
+    // ThietBi thietBi = new ThietBi(maThietBi);
+    // dsPhieuNhapChiTiet.themThietBi(thietBi);
+    // dsPhieuNhapChiTiet.capNhatSoLuongThietBi(maThietBi, soLuong, dsThietBi);
+    // }
+    // }
+
+    // dsPhieuNhap.add(phieuNhap);
+
+    // System.out.println("Phiếu nhập đã được thêm vào danh sách.");
+    // }
+
+    public void nhapPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet, danhSachThietBi dsThietBi,
+            DanhSachThucAn dsThucAn) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap so luong phieu nhap can nhap: ");
+        int n = sc.nextInt();
+        for (int i = 0; i < n; ++i) {
+            System.out.println("Nhap phieu nhap thu " + (i + 1) + ":");
+            PhieuNhap phieunhap = new PhieuNhap();
+            phieunhap.nhap();
+            double tongTien = dsPhieuNhapChiTiet.nhapPhieuNhapChiTiet(phieunhap.getMaPhieuNhap(),
+                    phieunhap.getNgayNhap(), dsThietBi, dsThucAn);
+            phieunhap.setDonGia(tongTien);
+            dsPhieuNhap.add(phieunhap);
         }
-    
-        PhieuNhapThucAn phieuNhap = new PhieuNhapThucAn(maPhieuNhap, ngayNhap, soLuong);
-        dsPhieuNhap.add(phieuNhap);
-    
-        System.out.println("Phiếu nhập đã được thêm vào danh sách.");
     }
 
-    public void themPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {
-        PhieuNhapThucAn phieunhap = new PhieuNhapThucAn();
+    public void themPhieuNhap(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet, danhSachThietBi dsThietBi,
+            DanhSachThucAn dsThucAn) {
+        PhieuNhap phieunhap = new PhieuNhap();
         phieunhap.nhap();
-        double tongTien = dsPhieuNhapChiTiet.nhapPhieuNhapChiTiet(phieunhap.getMaPhieuNhap(), phieunhap.getNgayNhap());
+        double tongTien = dsPhieuNhapChiTiet.nhapPhieuNhapChiTiet(phieunhap.getMaPhieuNhap(), phieunhap.getNgayNhap(),
+                dsThietBi, dsThucAn);
         dsPhieuNhap.add(phieunhap);
     }
 
@@ -94,7 +110,7 @@ public class danhSachPhieuNhap {
         System.out.println("Nhap ma phieu nhap can tim: ");
         Scanner sc = new Scanner(System.in);
         String maPHieuNhap = sc.nextLine();
-        PhieuNhapThucAn ans = timPhieuNhap(maPHieuNhap);
+        PhieuNhap ans = timPhieuNhap(maPHieuNhap);
         if (ans == null) {
             System.out.println("Khong tim thay phieu nhap");
             return;
@@ -102,9 +118,9 @@ public class danhSachPhieuNhap {
             System.out.println(ans);
     }
 
-    public PhieuNhapThucAn timPhieuNhap(String maphieu) {
-        PhieuNhapThucAn ans = null;
-        for (PhieuNhapThucAn phieunhap : dsPhieuNhap) {
+    public PhieuNhap timPhieuNhap(String maphieu) {
+        PhieuNhap ans = null;
+        for (PhieuNhap phieunhap : dsPhieuNhap) {
             if (phieunhap.getMaPhieuNhap().equals(maphieu)) {
                 ans = phieunhap;
                 break;
@@ -117,7 +133,7 @@ public class danhSachPhieuNhap {
         System.out.print("Nhap ma phieu can huy: ");
         Scanner sc = new Scanner(System.in);
         String maphieu = sc.nextLine();
-        PhieuNhapThucAn phieunhap = timPhieuNhap(maphieu);
+        PhieuNhap phieunhap = timPhieuNhap(maphieu);
         if (phieunhap == null) {
             System.out.println("KHong tim thay phieu nhap");
             return;
@@ -131,7 +147,8 @@ public class danhSachPhieuNhap {
         dsPhieuNhap.forEach(phieunhap -> System.out.println(phieunhap));
     }
 
-    public void luachon(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {
+    public void luachon(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet, danhSachThietBi dsThietBi,
+            DanhSachThucAn dsThucAn) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("--Menu-phieu-nhap--");
@@ -145,10 +162,10 @@ public class danhSachPhieuNhap {
             System.out.println("8.Thoat menu");
             switch (sc.nextInt()) {
                 case 1:
-                    nhapPhieuNhap(dsPhieuNhapChiTiet);
+                    nhapPhieuNhap(dsPhieuNhapChiTiet, dsThietBi, dsThucAn);
                     break;
                 case 2:
-                    themPhieuNhap(dsPhieuNhapChiTiet);
+                    themPhieuNhap(dsPhieuNhapChiTiet, dsThietBi, dsThucAn);
                     break;
                 case 3:
                     timPhieuNhap();
@@ -187,7 +204,7 @@ public class danhSachPhieuNhap {
             System.out.println(ex.toString());
         }
         try {
-            dsPhieuNhap = (ArrayList<PhieuNhapThucAn>) ois.readObject();
+            dsPhieuNhap = (ArrayList<PhieuNhap>) ois.readObject();
         } catch (IOException ex) {
             System.out.println(ex.toString());
         } catch (ClassNotFoundException ex) {

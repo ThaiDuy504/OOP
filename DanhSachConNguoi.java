@@ -9,9 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import Net.NhanVien;
-import Net.QuyenHanNhanVien;
-
 public class DanhSachConNguoi {
 	ConNguoi[] arr = new ConNguoi[1000];
 	int n;
@@ -24,11 +21,8 @@ public class DanhSachConNguoi {
 
 	public void luachon() {
 		Scanner sc = new Scanner(System.in);
-		int x;
-		System.out.println("Nhap so luong ban dau: ");
-		n = Integer.parseInt(sc.nextLine());
-		arr = new ConNguoi[n];
 		boolean flag = true;
+		int x;
 		outer: while (flag) {
 			System.out.println("----------------Nhập lựa chọn-------------");
 			System.out.println("1.Nhap nhan vien (phuc vu).");
@@ -62,7 +56,7 @@ public class DanhSachConNguoi {
 				case 3:
 					System.out.println("Nhap khach hang " + "(" + (count + 1) + "/" + n + ")");
 					arr[count] = new KhachHang();
-					KhachHang kh = (KhachHang)arr[count];
+					KhachHang kh = (KhachHang) arr[count];
 					kh.nhap();
 					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanKhachHang());
 					count++;
@@ -149,17 +143,17 @@ public class DanhSachConNguoi {
 		int flag = -1;
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] != null) {
-				if (arr[i] instanceof KhachHang && ((KhachHang)arr[i]).getMaKhachHang().equalsIgnoreCase(maTimKiem)) {
+				if (arr[i] instanceof KhachHang && ((KhachHang) arr[i]).getMaKhachHang().equalsIgnoreCase(maTimKiem)) {
 					KhachHang kh = (KhachHang) arr[i];
 					kh.xuat();
 					flag = 1;
 					break;
-				}else if (arr[i] instanceof QuanLi && ((QuanLi)arr[i]).getMaNhanVien().equalsIgnoreCase(maTimKiem)) {
+				} else if (arr[i] instanceof QuanLi && ((QuanLi) arr[i]).getMaNhanVien().equalsIgnoreCase(maTimKiem)) {
 					QuanLi kh = (QuanLi) arr[i];
 					kh.xuat();
 					flag = 1;
 					break;
-				}else if (arr[i] instanceof PhucVu && ((PhucVu)arr[i]).getMaNhanVien().equalsIgnoreCase(maTimKiem)) {
+				} else if (arr[i] instanceof PhucVu && ((PhucVu) arr[i]).getMaNhanVien().equalsIgnoreCase(maTimKiem)) {
 					PhucVu kh = (PhucVu) arr[i];
 					kh.xuat();
 					flag = 1;
@@ -167,7 +161,7 @@ public class DanhSachConNguoi {
 				}
 			}
 		}
-		if(flag == -1){
+		if (flag == -1) {
 			System.out.println("Khong tim thay ma !!!");
 		}
 	}
@@ -211,7 +205,8 @@ public class DanhSachConNguoi {
 					index = i;
 					flag = 1;
 					break;
-				} else if (arr[i] instanceof KhachHang && ((KhachHang) arr[i]).getMaKhachHang().equalsIgnoreCase(maNhap)) {
+				} else if (arr[i] instanceof KhachHang
+						&& ((KhachHang) arr[i]).getMaKhachHang().equalsIgnoreCase(maNhap)) {
 					index = i;
 					flag = 1;
 					break;
@@ -245,12 +240,12 @@ public class DanhSachConNguoi {
 		}
 	}
 
-	public void XuatDanhSachKhachHang(){
+	public void XuatDanhSachKhachHang() {
 		System.out.println("---------Danh sach khach hang la------------");
 		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] != null){
-				if(arr[i] instanceof KhachHang){
-					((KhachHang)arr[i]).xuat();
+			if (arr[i] != null) {
+				if (arr[i] instanceof KhachHang) {
+					((KhachHang) arr[i]).xuat();
 				}
 			}
 		}
@@ -322,5 +317,10 @@ public class DanhSachConNguoi {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		DanhSachConNguoi ds = new DanhSachConNguoi();
+		ds.luachon();
 	}
 }

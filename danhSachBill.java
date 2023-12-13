@@ -3,6 +3,7 @@ package Net;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Net.DanhSachThucAn;
 import Net.danhSachBillChiTiet;
 
 import java.io.FileInputStream;
@@ -33,23 +34,23 @@ public class danhSachBill {
         this.dsBill = dsBill;
     }
 
-    public void nhapBill(danhSachBillChiTiet dsBillChiTiet) {
+    public void nhapBill(danhSachBillChiTiet dsBillChiTiet, DanhSachThucAn dsThucAn) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong bill can nhap: ");
         int n = sc.nextInt();
         for (int i = 0; i < n; ++i) {
             System.out.println("Nhap bill thu " + (i + 1) + ":");
             Bill newBill = new Bill();
-            double tongTienThucAn = dsBillChiTiet.NhapBillChiTiet(newBill.getMaBill(), newBill.getNgayLap());
+            double tongTienThucAn = dsBillChiTiet.NhapBillChiTiet(newBill.getMaBill(), newBill.getNgayLap(), dsThucAn);
             newBill.setTongTienThucAn(tongTienThucAn);
             newBill.nhap();
             dsBill.add(newBill);
         }
     }
 
-    public void themBill(danhSachBillChiTiet dsBillChiTiet) {
+    public void themBill(danhSachBillChiTiet dsBillChiTiet, DanhSachThucAn dsThucAn) {
         Bill newBill = new Bill();
-        double tongTienThucAn = dsBillChiTiet.NhapBillChiTiet(newBill.getMaBill(), newBill.getNgayLap());
+        double tongTienThucAn = dsBillChiTiet.NhapBillChiTiet(newBill.getMaBill(), newBill.getNgayLap(), dsThucAn);
         newBill.setTongTienThucAn(tongTienThucAn);
         newBill.nhap();
         dsBill.add(newBill);
@@ -97,7 +98,7 @@ public class danhSachBill {
         dsBill.forEach((bill) -> System.out.println(bill));
     }
 
-    public void luachon(danhSachBillChiTiet dsBillChiTiet) {
+    public void luachon(danhSachBillChiTiet dsBillChiTiet, DanhSachThucAn dsThucAn) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("--Menu-Bill--");
@@ -111,10 +112,10 @@ public class danhSachBill {
             System.out.println("8.Thoat menu");
             switch (sc.nextInt()) {
                 case 1:
-                    nhapBill(dsBillChiTiet);
+                    nhapBill(dsBillChiTiet, dsThucAn);
                     break;
                 case 2:
-                    themBill(dsBillChiTiet);
+                    themBill(dsBillChiTiet, dsThucAn);
                     break;
                 case 3:
                     timBill();

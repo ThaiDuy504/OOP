@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Net.DanhSachThucAn;
+import Net.ThucAn;
+
 public class danhSachBillChiTiet {
     private ArrayList<BillChiTiet> dsBillChiTiet = new ArrayList<>();
 
@@ -30,14 +33,31 @@ public class danhSachBillChiTiet {
         this.dsBillChiTiet = dsBillChiTiet;
     }
 
-    public double NhapBillChiTiet(String maBill, String ngayXuat) {
+    public double NhapBillChiTiet(String maBill, String ngayXuat, DanhSachThucAn dsThucAn) {
         int i = 0;
         double tongTien = 0;
         Scanner scan = new Scanner(System.in);
         while (true) {
             BillChiTiet bill = new BillChiTiet(maBill, ngayXuat);
             System.out.print("Nhap bill chi tiet so " + (++i) + ": ");
-            bill.nhap();
+            ThucAn thucAn = new ThucAn();
+            thucAn.setMaThucAn();
+            ThucAn ans = dsThucAn.timkiemThucAn(thucAn.getMaThucAn());
+            while (ans == null) {
+                System.out.println("Khong tim thay ma thuc an,moi nhap lai ");
+                thucAn.setMaThucAn();
+                ans = dsThucAn.timkiemThucAn(thucAn.getMaThucAn());
+            }
+            thucAn.setSoluong();
+            while (ans.getSoluong() - thucAn.getSoluong() < 0) {
+                System.out.println("Khong du thuc an yeu cau moi nhap lai: ");
+                thucAn.getSoluong();
+            }
+            ans.setSoluong(ans.getSoluong() - thucAn.getSoluong());
+            thucAn.setDonGia(ans.getDonGia());
+            thucAn.setTheLoai(ans.getTheLoai());
+            thucAn.setTenThucAn(ans.getTenThucAn());
+            bill.setThucAn(thucAn);
             tongTien += bill.getDonGia();
             dsBillChiTiet.add(bill);
             System.out.print("Ban co muon nhap tiep(0/1)? ");

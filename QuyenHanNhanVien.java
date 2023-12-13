@@ -47,13 +47,15 @@ public class QuyenHanNhanVien extends QuyenHan implements IChucNangNhanVien {
                     xemLuong(tongHopDauVao.getConNguoi());
                     break;
                 case 4:
-                    quanlyBill(tongHopDauVao.getDsBill(), tongHopDauVao.getDsBillChiTiet());
+                    quanlyBill(tongHopDauVao.getDsBill(), tongHopDauVao.getDsBillChiTiet(),
+                            tongHopDauVao.getDsThucAn());
                     break;
                 case 5:
                     quanlyBillChiTiet(tongHopDauVao.getDsBillChiTiet());
                     break;
                 case 6:
-                    quanlyPhieuNhap(tongHopDauVao.getDsPhieuNhap(), tongHopDauVao.getDsPhieuNhapChiTiet());
+                    quanlyPhieuNhap(tongHopDauVao.getDsPhieuNhap(), tongHopDauVao.getDsPhieuNhapChiTiet(),
+                            tongHopDauVao.getDsThietBi(), tongHopDauVao.getDsThucAn());
                     break;
                 case 7:
                     quanlyPhieuNhapChiTiet(tongHopDauVao.getDsPhieuNhapChiTiet());
@@ -99,16 +101,17 @@ public class QuyenHanNhanVien extends QuyenHan implements IChucNangNhanVien {
         }
     };
 
-    public void quanlyBill(danhSachBill dsbill, danhSachBillChiTiet dsBillChiTiet) {
-        dsbill.luachon(dsBillChiTiet);
+    public void quanlyBill(danhSachBill dsbill, danhSachBillChiTiet dsBillChiTiet, DanhSachThucAn dsThucAn) {
+        dsbill.luachon(dsBillChiTiet, dsThucAn);
     };
 
     public void quanlyBillChiTiet(danhSachBillChiTiet dsBillChiTiet) {
         dsBillChiTiet.luachon();
     };
 
-    public void quanlyPhieuNhap(danhSachPhieuNhap dsPhieuNhap, danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {
-        dsPhieuNhap.luachon(dsPhieuNhapChiTiet);
+    public void quanlyPhieuNhap(danhSachPhieuNhap dsPhieuNhap, danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet,
+            danhSachThietBi dsThietBi, DanhSachThucAn dsThucAn) {
+        dsPhieuNhap.luachon(dsPhieuNhapChiTiet, dsThietBi, dsThucAn);
     };
 
     public void quanlyPhieuNhapChiTiet(danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet) {

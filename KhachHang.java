@@ -48,6 +48,7 @@ public class KhachHang extends ConNguoi {
     public void setDiemTichLuy(double diemTichLuy) {
         while (true) {
             if (diemTichLuy >= 0.0) {
+                this.diemTichLuy = diemTichLuy;
                 return;
             } else {
                 System.out.print("Điểm Tích Lũy không đúng! Mời Nhập Lại: ");

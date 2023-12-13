@@ -6,8 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import Net.ThucAn;
+import Net.danhSachBillChiTiet;
 
 public class DanhSachThucAn {
     private int n;
@@ -15,13 +19,26 @@ public class DanhSachThucAn {
     private Scanner sc = new Scanner(System.in);
 
     public DanhSachThucAn() {
-        arrta = null;
+        arrta = new ThucAn[100];
         n = 0;
     }
 
     public DanhSachThucAn(ThucAn[] arrta, int n) {
         this.arrta = arrta;
         this.n = n;
+    }
+
+    public void add(ThucAn thucAn) {
+        Arrays.copyOf(arrta, ++n);
+        arrta[n - 1] = thucAn;
+    }
+
+    public ThucAn[] getDsThucAn() {
+        return arrta;
+    }
+
+    public void setDsThucAn(ThucAn[] arrta) {
+        this.arrta = arrta;
     }
 
     public void menu() {
@@ -88,13 +105,27 @@ public class DanhSachThucAn {
         }
     }
 
-    public ThucAn timkiemThucAn() {
+    public void timkiemThucAn() {
         System.out.println("\n---------- Tìm kiếm thức ăn ----------");
         System.out.print("Nhập vào mã thức ăn cần tìm:");
         String mta = sc.nextLine();
-        for (int i = 0; i < arrta.length; i++)
+        mta = mta.toUpperCase();
+        ThucAn ans = timkiemThucAn(mta);
+        if (ans == null) {
+            System.out.println("khong tim thay");
+            return;
+        } else {
+            ans.xuat();
+        }
+    }
+
+    public ThucAn timkiemThucAn(String mta) {
+        for (int i = 0; i < arrta.length; i++) {
+            if (arrta[i] == null)
+                continue;
             if (arrta[i].getMaThucAn().equals(mta))
                 return arrta[i];
+        }
         return null;
     }
 
@@ -114,6 +145,8 @@ public class DanhSachThucAn {
         int index = -1;
 
         for (int i = 0; i < arrta.length; i++) {
+            if (arrta[i] == null)
+                continue;
             if (arrta[i].getMaThucAn().equals(mta)) {
                 index = i;
                 break;
@@ -122,6 +155,8 @@ public class DanhSachThucAn {
 
         if (index != -1) {
             for (int i = index; i < arrta.length - 1; i++) {
+                if (arrta[i] == null)
+                    continue;
                 arrta[i] = arrta[i + 1];
             }
             arrta = Arrays.copyOf(arrta, n - 1);
@@ -136,6 +171,8 @@ public class DanhSachThucAn {
         System.out.print("Nhập mã thức ăn cần sửa:");
         String mta = sc.nextLine();
         for (int i = 0; i < arrta.length; i++) {
+            if (arrta[i] == null)
+                continue;
             if (arrta[i].getMaThucAn().equals(mta)) {
                 System.out.println("Nhập thông tin thức ăn mới:");
                 arrta[i].nhap();
@@ -148,8 +185,31 @@ public class DanhSachThucAn {
         System.out.println("\n---------- Danh sách thức ăn ----------");
         System.out.println("Danh sách thức ăn:");
         for (int i = 0; i < arrta.length; i++) {
+            if (arrta[i] == null)
+                continue;
             System.out.println("Thức ăn thứ " + (i + 1) + ":");
             arrta[i].xuat();
+        }
+    }
+
+    public void thongKe(danhSachBillChiTiet dsBillChiTiet) {
+        ArrayList<String> loai = new ArrayList<>();
+        for (ThucAn ta : arrta) {
+            if (ta == null)
+                continue;
+            if (loai.indexOf(ta.getTheLoai()) == -1)
+                loai.add(ta.getTheLoai());
+        }
+        for (String s : loai) {
+            System.out.println("Loai : " + s);
+            double tien = 0;
+            for (ThucAn ta : arrta) {
+                if (ta == null)
+                    continue;
+                if (s.equals(ta.getTheLoai()))
+                    tien += ta.getDonGia();
+            }
+            System.out.println("Tong Tien: " + tien);
         }
     }
 

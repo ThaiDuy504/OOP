@@ -44,7 +44,7 @@ public class NhaPhanPhoi {
     public void setTenNhaPhanPhoi() {
         String tenNhaPhanPHoi;
         while (true) {
-            System.out.print("Nhap ma nha phan phoi: ");
+            System.out.print("Nhap ten nha phan phoi: ");
             tenNhaPhanPHoi = sc.nextLine();
             if (checkLoi.checkTen(tenNhaPhanPHoi) == false) {
                 System.out.println("Ten nha phan phoi khong duoc bat dau bang khoang trang va khong co ky tu dac biet");

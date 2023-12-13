@@ -11,16 +11,18 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Net.DanhSachThucAn;
+import Net.Devices;
+import Net.PhieuNhapThietBiChiTiet;
+import Net.PhieuNhapThucAnChiTiet;
+import Net.ThucAn;
+import Net.danhSachThietBi;
+
 public class danhSachPhieuNhapChiTiet {
     ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet = new ArrayList<>();
-    private ArrayList<ThucAn> dsThucAn;
-    private ArrayList<ThietBi> dsThietBi;
-
 
     public danhSachPhieuNhapChiTiet() {
         dsPhieuNhapChiTiet = new ArrayList<>();
-        dsThucAn = new ArrayList<>();
-        dsThietBi = new ArrayList<>();
     }
 
     public danhSachPhieuNhapChiTiet(ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet) {
@@ -34,60 +36,73 @@ public class danhSachPhieuNhapChiTiet {
     public void setDsPhieuNhapChiTiet(ArrayList<PhieuNhapChiTiet> dsPhieuNhapChiTiet) {
         this.dsPhieuNhapChiTiet = dsPhieuNhapChiTiet;
     }
-     public void themThucAn(ThucAn thucAn) {
-        dsThucAn.add(thucAn);
-    }
 
-    public void themThietBi(ThietBi thietBi) {
-        dsThietBi.add(thietBi);
-    }
-
-    public boolean kiemTraTonTaiThucAn(String maThucAn) {
-        for (ThucAn thucAn : dsThucAn) {
+    public void capNhatSoLuongThucAn(String maThucAn, int soLuong, DanhSachThucAn dsThucAn) {
+        for (ThucAn thucAn : dsThucAn.getDsThucAn()) {
             if (thucAn.getMaThucAn().equals(maThucAn)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean kiemTraTonTaiThietBi(String maThietBi) {
-        for (ThietBi thietBi : dsThietBi) {
-            if (thietBi.getMaThietBi().equals(maThietBi)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void capNhatSoLuongThucAn(String maThucAn, int soLuong) {
-        for (ThucAn thucAn : dsThucAn) {
-            if (thucAn.getMaThucAn().equals(maThucAn)) {
-                thucAn.setSoLuong(thucAn.getSoLuong() + soLuong);
+                thucAn.setSoluong(thucAn.getSoluong() + soLuong);
                 return;
             }
         }
     }
 
-    public void capNhatSoLuongThietBi(String maThietBi, int soLuong) {
-        for (ThietBi thietBi : dsThietBi) {
+    public void capNhatSoLuongThietBi(String maThietBi, int soLuong, danhSachThietBi dsThietBi) {
+        for (Devices thietBi : dsThietBi.getDsThietBi()) {
             if (thietBi.getMaThietBi().equals(maThietBi)) {
-                thietBi.setSoLuong(thietBi.getSoLuong() + soLuong);
+                thietBi.setSoluong(thietBi.getSoluong() + soLuong);
                 return;
             }
         }
     }
 
-    public double nhapPhieuNhapChiTiet(String maPhieuNhap, String ngayXuat) {
+    public double nhapPhieuNhapChiTiet(String maPhieuNhap, String ngayXuat, danhSachThietBi dsThietbi,
+            DanhSachThucAn dsThucAn) {
         int i = 0;
         double tongTien = 0;
         Scanner sc = new Scanner(System.in);
         while (true) {
-            PhieuNhapChiTiet phieunhap = new PhieuNhapChiTiet(maPhieuNhap, ngayXuat);
-            System.out.println("Nhap phieu nhap chi tiet so " + (++i) + ": ");
-            phieunhap.nhap();
-            tongTien += phieunhap.getDonGia();
-            dsPhieuNhapChiTiet.add(phieunhap);
+            System.out.println("Nhap lua chon: ");
+            System.out.println("1. Thiet bi");
+            System.out.println("2. Thuc an");
+            int choose = sc.nextInt();
+            if (choose == 1) {
+                PhieuNhapThietBiChiTiet phieunhap = new PhieuNhapThietBiChiTiet(maPhieuNhap, ngayXuat);
+                System.out.println("Nhap phieu nhap chi tiet so " + (++i) + ": ");
+                Devices thietbi = new Devices();
+                thietbi.setMaThietBi();
+                Devices ans = dsThietbi.timKiemThietBi(thietbi.getMaThietBi());
+                if (ans != null) {
+                    thietbi.setDonGia(ans.getDonGia());
+                    thietbi.setSoluong();
+                    capNhatSoLuongThietBi(thietbi.getMaThietBi(), thietbi.getSoluong(), dsThietbi);
+                } else {
+                    thietbi.nhap("");
+                    dsThietbi.getDsThietBi().add(thietbi);
+                }
+                phieunhap.setThietbi(thietbi);
+                tongTien += phieunhap.getTongTien();
+                dsPhieuNhapChiTiet.add(phieunhap);
+            } else if (choose == 2) {
+                PhieuNhapThucAnChiTiet phieunhap = new PhieuNhapThucAnChiTiet(maPhieuNhap, ngayXuat);
+                System.out.println("Nhap phieu nhap chi tiet so " + (++i) + ": ");
+                ThucAn thucAn = new ThucAn();
+                thucAn.setMaThucAn();
+                ThucAn ans = dsThucAn.timkiemThucAn(thucAn.getMaThucAn());
+                if (ans != null) {
+                    thucAn.setDonGia(ans.getDonGia());
+                    thucAn.setSoluong();
+                    capNhatSoLuongThucAn(ans.getMaThucAn(), thucAn.getSoluong(), dsThucAn);
+                } else {
+                    thucAn.nhap("");
+                    dsThucAn.add(thucAn);
+                }
+                phieunhap.setThucAn(thucAn);
+                tongTien += phieunhap.getTongTien();
+                dsPhieuNhapChiTiet.add(phieunhap);
+            } else {
+                System.out.println("Lua chon khong hop le");
+                continue;
+            }
             System.out.print("Ban co muon nhap tiep(0/1): ");
             if (sc.nextInt() == 0) {
                 break;
@@ -97,12 +112,52 @@ public class danhSachPhieuNhapChiTiet {
         return tongTien;
     }
 
-    public double themPhieuNhapChiTiet(String maPhieuNhap, String ngayXuat) {
-        PhieuNhapChiTiet phieunhap = new PhieuNhapChiTiet(maPhieuNhap, ngayXuat);
-        System.out.println("Nhap phieu nhap chi tiet ");
-        phieunhap.nhap();
-        dsPhieuNhapChiTiet.add(phieunhap);
-        return phieunhap.getDonGia();
+    public double themPhieuNhapChiTiet(String maPhieuNhap, String ngayXuat, danhSachThietBi dsThietbi,
+            DanhSachThucAn dsThucAn) {
+        Scanner sc = new Scanner(System.in);
+        int tongTien = 0;
+        System.out.println("Nhap lua chon: ");
+        System.out.println("1. Thiet bi");
+        System.out.println("2. Thuc an");
+        int choose = sc.nextInt();
+        if (choose == 1) {
+            PhieuNhapThietBiChiTiet phieunhap = new PhieuNhapThietBiChiTiet(maPhieuNhap, ngayXuat);
+            System.out.println("Nhap phieu nhap chi tiet: ");
+            Devices thietbi = new Devices();
+            thietbi.setMaThietBi();
+            Devices ans = dsThietbi.timKiemThietBi(thietbi.getMaThietBi());
+            if (ans != null) {
+                thietbi.setDonGia(ans.getDonGia());
+                thietbi.setSoluong();
+                capNhatSoLuongThietBi(thietbi.getMaThietBi(), thietbi.getSoluong(), dsThietbi);
+            } else {
+                thietbi.nhap("");
+                dsThietbi.getDsThietBi().add(thietbi);
+            }
+            phieunhap.setThietbi(thietbi);
+            tongTien += phieunhap.getTongTien();
+            dsPhieuNhapChiTiet.add(phieunhap);
+        } else if (choose == 2) {
+            PhieuNhapThucAnChiTiet phieunhap = new PhieuNhapThucAnChiTiet(maPhieuNhap, ngayXuat);
+            System.out.println("Nhap phieu nhap chi tiet so : ");
+            ThucAn thucAn = new ThucAn();
+            thucAn.setMaThucAn();
+            ThucAn ans = dsThucAn.timkiemThucAn(thucAn.getMaThucAn());
+            if (ans != null) {
+                thucAn.setDonGia(ans.getDonGia());
+                thucAn.setSoluong();
+                capNhatSoLuongThucAn(ans.getMaThucAn(), thucAn.getSoluong(), dsThucAn);
+            } else {
+                thucAn.nhap("");
+                dsThucAn.add(thucAn);
+            }
+            phieunhap.setThucAn(thucAn);
+            tongTien += phieunhap.getTongTien();
+            dsPhieuNhapChiTiet.add(phieunhap);
+        } else {
+            System.out.println("Lua chon khong hop le");
+        }
+        return tongTien;
     }
 
     public danhSachPhieuNhapChiTiet timDanhSachPhieuNhapChiTiet() {

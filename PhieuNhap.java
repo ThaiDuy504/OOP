@@ -1,12 +1,17 @@
 package Net;
 
 import java.util.Scanner;
+
+import Net.PhieuNhapChiTiet;
+import Net.danhSachPhieuNhapChiTiet;
+import Net.danhSachThietBi;
+
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class PhieuNhapThucAn {
-	private NhaPhanPhoi nhaPhanPhoi;
+public class PhieuNhap {
+	private NhaPhanPhoi nhaPhanPhoi = new NhaPhanPhoi();
 	private String maNhanVien;
 	private String maPhieuNhap;
 	private String ngayNhap;
@@ -15,11 +20,11 @@ public class PhieuNhapThucAn {
 	private static int phieuNhapID = 0;
 	Scanner sc = new Scanner(System.in);
 
-	public PhieuNhapThucAn() {
+	public PhieuNhap() {
 		maPhieuNhap = "PNHAP" + (phieuNhapID++);
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		ngayNhap = sdf.format(d);
+		ngayNhap = sdf.format(d.getTime());
 		donGia = 0;
 	}
 
@@ -81,7 +86,7 @@ public class PhieuNhapThucAn {
 	}
 
 	public static void setPhieuNhapID(int phieuNhapID) {
-		PhieuNhapThucAn.phieuNhapID = phieuNhapID;
+		PhieuNhap.phieuNhapID = phieuNhapID;
 	}
 
 	public void huyPhieuNhap() {
@@ -90,6 +95,7 @@ public class PhieuNhapThucAn {
 
 	public void nhap() {
 		nhaPhanPhoi.nhap();
+		System.out.println("Nhap ma nhan vien");
 		setMaNhanVien();
 	}
 

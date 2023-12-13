@@ -5,6 +5,7 @@ import Net.danhSachBill;
 import Net.danhSachBillChiTiet;
 import Net.danhSachPhieuNhap;
 import Net.danhSachPhieuNhapChiTiet;
+import Net.danhSachThietBi;
 
 public class TongHopDauVao {
     private ConNguoi conNguoi;
@@ -14,6 +15,7 @@ public class TongHopDauVao {
     private danhSachPhieuNhapChiTiet dsPhieuNhapChiTiet;
     private DanhSachThucAn dsThucAn;
     private danhSachTang dsTang;
+    private danhSachThietBi dsThietBi;
 
     public TongHopDauVao() {
 
@@ -77,6 +79,14 @@ public class TongHopDauVao {
 
     public void setDsTang(danhSachTang dsTang) {
         this.dsTang = dsTang;
+    }
+
+    public danhSachThietBi getDsThietBi() {
+        return dsThietBi;
+    }
+
+    public void setDsThietBi(danhSachThietBi dsThietBi) {
+        this.dsThietBi = dsThietBi;
     }
 
 }

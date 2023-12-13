@@ -2,27 +2,25 @@ package Net;
 
 import java.util.Scanner;
 
+import Net.DanhSachConNguoi;
+
 public class QuyenHanAdmin extends QuyenHan implements IChucNangAdmin {
     public QuyenHanAdmin() {
         setLoaiQuyenHan("ADM");
     }
 
-    public void xemChucNang(DanhSachKhachHang dsKhachHang, DanhSachNhanVien dsNhanVien) {
+    public void xemChucNang(DanhSachConNguoi dsConNguoi) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("---Menu---");
-            System.out.println("1.Quan Ly Khach Hang");
-            System.out.println("2.Quan Ly Nhan Vien");
-            System.out.println("3.Thoat menu");
+            System.out.println("1.Quan ly danh sach tai khoan");
+            System.out.println("2.Thoat menu");
             int choose = sc.nextInt();
             switch (choose) {
                 case 1:
-                    quanLyKhachHang(dsKhachHang);
+                    dsConNguoi.luachon();
                     break;
                 case 2:
-                    quanLyNhanVien(dsNhanVien);
-                    break;
-                case 3:
                     return;
                 default:
                     System.out.println("Lua chon khong hop le");
@@ -31,12 +29,8 @@ public class QuyenHanAdmin extends QuyenHan implements IChucNangAdmin {
         }
     }
 
-    public void quanLyKhachHang(DanhSachKhachHang dsKhachHang) {
-        dsKhachHang.luachon();
-    };
-
-    public void quanLyNhanVien(DanhSachNhanVien dsNhanVien) {
-        dsNhanVien.luachon();
-    };
+    public void quanLyTaiKhoan(DanhSachConNguoi dsConNguoi) {
+        dsConNguoi.luachon();
+    }
 
 }
