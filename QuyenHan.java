@@ -30,7 +30,7 @@ public abstract class QuyenHan {
     public void xemChucNang(ConNguoi conNguoi) {
     }
 
-    public void xemChucNang(DanhSachKhachHang dsKhachHang, DanhSachNhanVien DanhSachNhanVien) {
+     public void xemChucNang(DanhSachConNguoi danhSachConNguoi) {
     }
 
     public void xemChucNang(TongHopDauVao tongHopDauVao) {
