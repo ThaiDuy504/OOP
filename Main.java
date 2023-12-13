@@ -5,7 +5,10 @@ import java.util.Scanner;
 import Net.DanhSachConNguoi;
 import Net.DanhSachThucAn;
 import Net.KhachHang;
+import Net.QuanLi;
 import Net.QuyenHanAdmin;
+import Net.QuyenHanNhanVien;
+import Net.TaiKhoan;
 import Net.TongHopDauVao;
 import Net.danhSachPhieuNhap;
 import Net.danhSachPhieuNhapChiTiet;
@@ -23,6 +26,9 @@ public class Main {
         danhSachThietBi dsThietBi = new danhSachThietBi();
         danhSachTang dsTang = new danhSachTang();
         ConNguoi conNguoi = null;
+        TaiKhoan tknv = new TaiKhoan("thaideptrai", "12345678", "30/08/2002", "OPEN", new QuyenHanNhanVien());
+        ConNguoi nhanvien = new QuanLi("NV0000", "TEO", "vo gia cu", "29/02/2000", "0", tknv, 3000);
+        System.out.println(nhanvien);
         while (true) {
             System.out.println("1.Dang nhap");
             System.out.println("2.Thoat chuong chinh");
@@ -39,8 +45,12 @@ public class Main {
                     quyenHan.xemChucNang(dsConNguoi);
                     continue;
                 }
-                if (dsConNguoi.timKiemTheoTaiKhoan(ten, matkhau) != null) {
+                if (dsConNguoi.timKiemTheoTaiKhoan(ten, matkhau) != null
+                        || (ten.equals(nhanvien.getTaiKhoan().getTendangnhap())
+                                && matkhau.equals(nhanvien.getTaiKhoan().getMatkhau()))) {
                     conNguoi = dsConNguoi.timKiemTheoTaiKhoan(ten, matkhau);
+                    if (conNguoi == null)
+                        conNguoi = nhanvien;
                     if (conNguoi instanceof NhanVien) {
                         TongHopDauVao tongHopDauVao = new TongHopDauVao();
                         tongHopDauVao.setConNguoi(conNguoi);

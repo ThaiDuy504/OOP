@@ -51,7 +51,7 @@ public class danhSachBillChiTiet {
             thucAn.setSoluong();
             while (ans.getSoluong() - thucAn.getSoluong() < 0) {
                 System.out.println("Khong du thuc an yeu cau moi nhap lai: ");
-                thucAn.getSoluong();
+                thucAn.setSoluong();
             }
             ans.setSoluong(ans.getSoluong() - thucAn.getSoluong());
             thucAn.setDonGia(ans.getDonGia());
