@@ -41,56 +41,56 @@ public class DanhSachThucAn {
         this.arrta = arrta;
     }
 
-    public void menu() {
-        int choice;
-
-        do {
-            System.out.println("\n---------- Menu ----------");
+    public void luachon()
+	{
+		int choice;
+		while(true) {
+			System.out.println("\n---------- Menu ----------");
             System.out.println("1. Tìm kiếm thức ăn");
             System.out.println("2. Thêm thức ăn");
             System.out.println("3. Xóa thức ăn");
             System.out.println("4. Sửa thông tin thức ăn");
             System.out.println("5. Xuất danh sách thức ăn");
-            System.out.println("6. Ghi vào file");
-            System.out.println("7. Đọc từ file");
+            System.out.println("6. Nhập danh sách thức ăn");
+            System.out.println("7. Ghi vào file");
+            System.out.println("8. Đọc từ file");
             System.out.println("0. Thoát");
-
-            System.out.print("Chọn một số: ");
-            choice = sc.nextInt();
-
-            switch (choice) {
-                case 1:
-                    timkiemThucAn();
-                    break;
-                case 2:
-                    themThucAn();
-                    xuatdsThucAn();
-                    break;
-                case 3:
-                    xoaThucAn();
-                    xuatdsThucAn();
-                    break;
-                case 4:
-                    suaThucAn();
-                    xuatdsThucAn();
-                    break;
-                case 5:
-                    xuatdsThucAn();
-                    break;
-                case 6:
-                    writefile();
-                    break;
-                case 7:
-                    readfile();
-                    break;
-                case 0:
-                    System.out.println("Thoát chương trình.");
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại!");
+            
+            System.out.println("Chọn một số: ");
+            choice=sc.nextInt();
+            switch(choice) {
+            	case 1:
+            		timkiemThucAn();
+            		break;
+            	case 2:
+            		themThucAn();
+            		break;
+            	case 3:
+            		xoaThucAn();
+            		break;
+            	case 4:
+            		suaThucAn();
+            		break;
+            	case 5:
+            		xuatdsThucAn();
+            		break;
+            	case 6:
+            		nhapdsThucAn();
+            		break;
+            	case 7:
+            		writefile();
+            		break;
+            	case 8:
+            		readfile();
+            		break;
+            	case 0:
+            		System.out.println("Thoát chương trình");
+            		break;
+            	default:
+            		System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại");
             }
-        } while (choice != 0);
-    }
+		}
+	}
 
     public void nhapdsThucAn() {
         System.out.println("\n---------- Nhập danh sách thức ăn ----------");
@@ -99,9 +99,7 @@ public class DanhSachThucAn {
         arrta = new ThucAn[n];
         for (int i = 0; i < n; i++) {
             System.out.println("Nhập vào thức ăn thứ " + (i + 1));
-            ThucAn ta = new ThucAn();
-            ta.nhap();
-            arrta[i] = ta;
+            arrta[i].nhap();
         }
     }
 
