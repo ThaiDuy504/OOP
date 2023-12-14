@@ -40,26 +40,13 @@ public class DanhSachConNguoi {
 			x = Integer.parseInt(sc.nextLine());
 			switch (x) {
 				case 1:
-					System.out.println("Nhap nhan vien (Phuc vu) " + "(" + (count + 1) + "/" + n + ")");
-					arr[count] = new PhucVu();
-					arr[count].nhap();
-					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
-					count++;
+					ThemNvQuanli();
 					break;
 				case 2:
-					System.out.println("Nhap nhan vien (Quan li) " + "(" + (count + 1) + "/" + n + ")");
-					arr[count] = new QuanLi();
-					arr[count].nhap();
-					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanNhanVien());
-					count++;
+					ThemNvPhucvu();
 					break;
 				case 3:
-					System.out.println("Nhap khach hang " + "(" + (count + 1) + "/" + n + ")");
-					arr[count] = new KhachHang();
-					KhachHang kh = (KhachHang) arr[count];
-					kh.nhap();
-					arr[count].getTaiKhoan().setQuyenhan(new QuyenHanKhachHang());
-					count++;
+					Themkhachhang();
 					break;
 				case 4:
 					System.out.println("Nhap ma can tim kiem:");

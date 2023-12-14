@@ -63,9 +63,11 @@ public class danhSachPhong {
                     break;
                 }
             }
-            if (flag == 1)
+            if (flag == 1) {
                 continue;
+            }
             dsPhong[soluong++] = r;
+            i++;
         }
     }
 
